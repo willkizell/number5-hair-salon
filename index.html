@@ -172,7 +172,7 @@
       text-decoration: none;
     }
     .nav__logo-img {
-      height: 72px;
+      height: 88px;
       width: auto;
       object-fit: contain;
     }
@@ -279,6 +279,27 @@
     }
     .btn-book:link, .btn-book:visited { color: var(--white); }
     .btn-book:hover { background: #333; transform: translateY(-1px); }
+
+    /* Mobile phone icon button */
+    .btn-phone-icon {
+      display: none; /* shown only on mobile via media query */
+      align-items: center;
+      justify-content: center;
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: var(--dark);
+      flex-shrink: 0;
+      transition: background 0.25s ease;
+    }
+    .btn-phone-icon:hover { background: #333; }
+    .btn-phone-icon svg {
+      width: 15px; height: 15px;
+      stroke: var(--white);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
 
     /* Hamburger */
     .nav__hamburger {
@@ -1369,8 +1390,8 @@
     @media (max-width: 768px) {
       :root {
         --topbar-h: 34px;
-        --nav-h: 60px;
-        --header-h: 94px;
+        --nav-h: 76px;
+        --header-h: 110px;
       }
 
       /* Nav mobile layout */
@@ -1382,7 +1403,10 @@
       .nav__hamburger { display: flex; }
       .nav__links { display: none; }
       .nav__logo { justify-content: center; }
+      .nav__logo-img { height: 70px; }
       .nav__right .btn-book { display: none; }
+      .nav__right .lang-toggle { display: none; }
+      .nav__right .btn-phone-icon { display: inline-flex; }
       .mobile-overlay { display: block; }
 
       /* Hero */
@@ -1482,6 +1506,16 @@
 
         <a href="tel:6045598998" class="btn-book">
           <span data-en="Book Now" data-zh="预约">Book Now</span>
+        </a>
+
+        <!-- Mobile phone icon (replaces Book Now on small screens) -->
+        <a href="tel:6045598998" class="btn-phone-icon" aria-label="Call to book">
+          <svg viewBox="0 0 24 24">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
         </a>
       </div>
 
