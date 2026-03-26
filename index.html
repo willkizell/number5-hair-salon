@@ -1,0 +1,2398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Number 5 Hair Salon · UBC AMS Nest · Vancouver</title>
+  <meta name="description" content="Professional hair salon at UBC AMS Nest, 401-6133 University Boulevard. Walk-ins welcome. Open daily 10:30am–6:30pm. Call 604-559-8998. 欢迎光临Number 5美发沙龙。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Dancing+Script:wght@400;600&family=Inter:wght@300;400;500&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ═══════════════════════════════════════
+       VARIABLES
+    ═══════════════════════════════════════ */
+    :root {
+      --white:       #FFFFFF;
+      --off-white:   #F7F7F7;
+      --dark:        #1A1A1A;
+      --dark-card:   #242424;
+      --gold:        #C9A96E;
+      --gold-soft:   rgba(201,169,110,0.12);
+      --muted:       #888888;
+      --border:      #EEEEEE;
+      --border-nav:  #F0F0F0;
+
+      --ff-display:  'Cormorant Garamond', Georgia, serif;
+      --ff-body:     'Inter', system-ui, sans-serif;
+      --ff-zh:       'Noto Sans SC', sans-serif;
+      --ff-logo:     'Dancing Script', cursive;
+
+      --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+
+      --topbar-h:  36px;
+      --nav-h:     72px;
+      --header-h:  108px; /* topbar + nav */
+    }
+
+    /* ═══════════════════════════════════════
+       RESET & BASE
+    ═══════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: var(--ff-body);
+      background: var(--white);
+      color: var(--dark);
+      overflow-x: hidden;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    body::-webkit-scrollbar { display: none; }
+
+    /* Chinese typography */
+    body.lang-zh { font-family: var(--ff-zh), var(--ff-body); }
+    body.lang-zh .hero__h1,
+    body.lang-zh .section__heading,
+    body.lang-zh .svc-name,
+    body.lang-zh .cta-banner__heading,
+    body.lang-zh .contact__phone,
+    body.lang-zh .review-card__quote,
+    body.lang-zh .stat__number,
+    body.lang-zh .contact__card-title { font-family: var(--ff-zh), var(--ff-display); }
+    body.lang-zh .hero__sub,
+    body.lang-zh .section__sub,
+    body.lang-zh .about__body p,
+    body.lang-zh .svc-desc,
+    body.lang-zh .contact__body,
+    body.lang-zh .contact__info-value,
+    body.lang-zh .contact__card-info { font-size: 15px; letter-spacing: 0.01em; }
+
+    a { text-decoration: none; color: inherit; }
+    a:link, a:visited { color: inherit; }
+    img { display: block; max-width: 100%; }
+    button { cursor: pointer; }
+
+    /* ═══════════════════════════════════════
+       GRAIN OVERLAY
+    ═══════════════════════════════════════ */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+      opacity: 0.015;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ═══════════════════════════════════════
+       SCROLL REVEAL
+    ═══════════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.75s var(--ease-spring), transform 0.75s var(--ease-spring);
+    }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.08s; }
+    .d2 { transition-delay: 0.16s; }
+    .d3 { transition-delay: 0.24s; }
+    .d4 { transition-delay: 0.32s; }
+    .d5 { transition-delay: 0.40s; }
+    .d6 { transition-delay: 0.48s; }
+
+    /* ═══════════════════════════════════════
+       SITE HEADER (fixed wrapper)
+    ═══════════════════════════════════════ */
+    .site-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+    }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      background: var(--dark);
+      height: var(--topbar-h);
+      overflow: hidden;
+      transition: height 0.38s var(--ease-smooth);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .topbar.hidden { height: 0; }
+    .topbar__text {
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 0 20px;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      background: var(--white);
+      height: var(--nav-h);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .nav.scrolled {
+      border-bottom-color: var(--border-nav);
+      box-shadow: 0 2px 28px rgba(0,0,0,0.05);
+    }
+    .nav__inner {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 clamp(20px, 4vw, 56px);
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    /* Logo */
+    .nav__logo {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+    .nav__logo-img {
+      height: 36px;
+      width: auto;
+      object-fit: contain;
+    }
+    .nav__logo-text {
+      display: none;
+      flex-direction: column;
+    }
+    .nav__logo-text .wordmark {
+      font-family: var(--ff-logo);
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--dark);
+      line-height: 1;
+      letter-spacing: 0.01em;
+    }
+    .nav__logo-text .sub {
+      font-family: var(--ff-body);
+      font-size: 6.5px;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    /* Center links */
+    .nav__links {
+      display: flex;
+      list-style: none;
+      gap: clamp(24px, 3vw, 40px);
+    }
+    .nav__links a {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--dark);
+      position: relative;
+      padding-bottom: 3px;
+    }
+    .nav__links a::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; left: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width 0.3s var(--ease-smooth);
+    }
+    .nav__links a:hover::after { width: 100%; }
+
+    /* Right cluster */
+    .nav__right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-shrink: 0;
+    }
+
+    /* Language toggle */
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      border: 1px solid #D8D8D8;
+      border-radius: 100px;
+      overflow: hidden;
+    }
+    .lang-btn {
+      border: none;
+      background: none;
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      padding: 6px 11px;
+      min-height: 30px;
+      min-width: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .lang-btn.active {
+      background: var(--dark);
+      color: var(--white);
+    }
+
+    /* Book button */
+    .btn-book {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--dark);
+      color: var(--white);
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 10px 22px;
+      border-radius: 8px;
+      white-space: nowrap;
+      transition: background 0.25s ease, transform 0.25s ease;
+    }
+    .btn-book:link, .btn-book:visited { color: var(--white); }
+    .btn-book:hover { background: #333; transform: translateY(-1px); }
+
+    /* Hamburger */
+    .nav__hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 44px; height: 44px;
+      background: none;
+      border: none;
+      padding: 10px;
+      flex-shrink: 0;
+    }
+    .nav__hamburger span {
+      display: block;
+      width: 22px; height: 1.5px;
+      background: var(--dark);
+      border-radius: 1px;
+      transition: transform 0.35s var(--ease-spring), opacity 0.25s ease;
+    }
+    .nav__hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav__hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav__hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* ── MOBILE DRAWER ── */
+    .mobile-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0);
+      z-index: 98;
+      transition: background 0.35s ease;
+      pointer-events: none;
+    }
+    .mobile-overlay.open {
+      background: rgba(0,0,0,0.45);
+      pointer-events: all;
+    }
+
+    .mobile-drawer {
+      position: fixed;
+      top: 0; right: 0; bottom: 0;
+      width: min(300px, 82vw);
+      background: var(--white);
+      z-index: 99;
+      padding: 90px 36px 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transform: translateX(110%);
+      transition: transform 0.45s var(--ease-spring);
+      box-shadow: -8px 0 48px rgba(0,0,0,0.12);
+    }
+    .mobile-drawer.open { transform: translateX(0); }
+
+    .mobile-drawer__link {
+      display: block;
+      font-family: var(--ff-display);
+      font-size: 30px;
+      font-weight: 400;
+      color: var(--dark);
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: -0.01em;
+    }
+    .mobile-drawer__link:link, .mobile-drawer__link:visited { color: var(--dark); }
+
+    .mobile-drawer__footer {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .mobile-drawer .lang-toggle {
+      align-self: flex-start;
+    }
+    .mobile-drawer .btn-book {
+      width: 100%;
+      padding: 14px 22px;
+      font-size: 10px;
+    }
+
+    /* ═══════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════ */
+    .hero {
+      min-height: 100vh;
+      padding-top: var(--header-h);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .hero__content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(60px, 8vh, 100px) clamp(28px, 5vw, 72px) clamp(60px, 8vh, 100px) clamp(20px, 5vw, 72px);
+    }
+
+    .hero__line {
+      width: 36px;
+      height: 1px;
+      background: var(--gold);
+      margin-bottom: 24px;
+    }
+
+    .hero__eyebrow {
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 22px;
+    }
+
+    .hero__h1 {
+      font-family: var(--ff-display);
+      font-size: clamp(52px, 6.5vw, 96px);
+      font-weight: 400;
+      line-height: 1.0;
+      color: var(--dark);
+      letter-spacing: -0.02em;
+      margin-bottom: 28px;
+    }
+    .hero__h1 em {
+      font-style: italic;
+      color: var(--dark);
+    }
+
+    .hero__sub {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 380px;
+      line-height: 1.85;
+      margin-bottom: 44px;
+    }
+
+    .hero__ctas {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--dark);
+      color: var(--white);
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 17px 32px;
+      border-radius: 8px;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+    .btn-primary:link, .btn-primary:visited { color: var(--white); }
+    .btn-primary:hover { background: #2e2e2e; transform: translateY(-2px); }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      color: var(--dark);
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 17px 32px;
+      border: 1px solid #BEBEBE;
+      border-radius: 8px;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+    .btn-ghost:link, .btn-ghost:visited { color: var(--dark); }
+    .btn-ghost:hover { border-color: var(--dark); transform: translateY(-2px); }
+
+    /* Hero image side */
+    .hero__visual {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(160deg, #EAEAEA 0%, #D2D2D2 50%, #C8C8C8 100%);
+    }
+    .hero__visual img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .hero__visual::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(201,169,110,0.06) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .hero__visual-label {
+      position: absolute;
+      bottom: 28px;
+      left: 28px;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.22);
+      font-family: var(--ff-body);
+    }
+
+    /* ═══════════════════════════════════════
+       SHARED SECTION PRIMITIVES
+    ═══════════════════════════════════════ */
+    .section {
+      padding: clamp(80px, 10vw, 140px) clamp(20px, 5vw, 72px);
+    }
+    .container {
+      max-width: 1320px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .heading {
+      font-family: var(--ff-display);
+      font-size: clamp(36px, 4vw, 56px);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--dark);
+      letter-spacing: -0.01em;
+      margin-bottom: 18px;
+    }
+
+    .subtext {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.85;
+      max-width: 540px;
+      margin-bottom: 56px;
+    }
+
+    /* ═══════════════════════════════════════
+       NEST LOCATION BAND
+    ═══════════════════════════════════════ */
+    .nest-band {
+      background: var(--dark);
+      padding: clamp(28px, 4vw, 44px) clamp(20px, 5vw, 72px);
+    }
+    .nest-band__inner {
+      max-width: 1320px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: clamp(24px, 4vw, 56px);
+      flex-wrap: wrap;
+    }
+    .nest-band__icon {
+      flex-shrink: 0;
+      width: 48px; height: 48px;
+      border: 1px solid rgba(201,169,110,0.35);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .nest-band__icon svg {
+      width: 18px; height: 18px;
+      fill: none;
+      stroke: var(--gold);
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .nest-band__content {
+      flex: 1;
+      min-width: 0;
+    }
+    .nest-band__label {
+      font-family: var(--ff-body);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .nest-band__title {
+      font-family: var(--ff-display);
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 400;
+      color: var(--white);
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+    }
+    .nest-band__title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .nest-band__divider {
+      width: 1px;
+      height: 56px;
+      background: rgba(255,255,255,0.1);
+      flex-shrink: 0;
+    }
+    .nest-band__details {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .nest-band__detail {
+      font-family: var(--ff-body);
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.5;
+    }
+    .nest-band__detail strong {
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+    }
+    .nest-band__link {
+      flex-shrink: 0;
+      font-family: var(--ff-body);
+      font-size: 9.5px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border-bottom: 1px solid rgba(201,169,110,0.35);
+      padding-bottom: 2px;
+      transition: border-color 0.2s ease, opacity 0.2s ease;
+      white-space: nowrap;
+    }
+    .nest-band__link:link, .nest-band__link:visited { color: var(--gold); }
+    .nest-band__link:hover { border-color: var(--gold); opacity: 0.8; }
+
+    @media (max-width: 768px) {
+      .nest-band__divider { display: none; }
+      .nest-band__link { align-self: flex-start; }
+    }
+
+    /* ═══════════════════════════════════════
+       SERVICES — editorial dark list + expand
+    ═══════════════════════════════════════ */
+    .services {
+      background: var(--dark);
+      position: relative;
+    }
+    .services::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: rgba(255,255,255,0.06);
+    }
+    .services .eyebrow { color: rgba(201,169,110,0.65); }
+    .services .heading { color: var(--white); }
+    .services .subtext { color: rgba(255,255,255,0.4); margin-bottom: 0; }
+
+    .svc-list {
+      list-style: none;
+      margin-top: 56px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+
+    /* Row wrapper */
+    .svc-row {
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      position: relative;
+    }
+    .svc-row::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: var(--gold);
+      transform: scaleY(0);
+      transform-origin: center;
+      transition: transform 0.4s var(--ease-spring);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .svc-row:hover::before,
+    .svc-row.open::before { transform: scaleY(1); }
+
+    /* Clickable header */
+    .svc-row__header {
+      display: grid;
+      grid-template-columns: 76px 1fr 1.6fr auto;
+      gap: 0 clamp(24px, 3.5vw, 56px);
+      align-items: center;
+      padding: clamp(24px, 3.2vw, 40px) 0;
+      padding-left: 20px;
+      cursor: pointer;
+      transition: padding-left 0.35s var(--ease-spring);
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    .svc-row:hover .svc-row__header,
+    .svc-row.open .svc-row__header { padding-left: 28px; }
+    .svc-row:hover .svc-num,
+    .svc-row.open .svc-num { color: var(--gold); }
+
+    /* Ghost number */
+    .svc-num {
+      font-family: var(--ff-display);
+      font-size: clamp(40px, 4vw, 60px);
+      font-weight: 300;
+      color: rgba(255,255,255,0.07);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      transition: color 0.35s ease;
+      user-select: none;
+    }
+
+    .svc-name {
+      font-family: var(--ff-display);
+      font-size: clamp(22px, 2.2vw, 30px);
+      font-weight: 400;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+    }
+
+    .svc-desc {
+      font-family: var(--ff-body);
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.35);
+      line-height: 1.75;
+    }
+
+    /* Chevron arrow */
+    .svc-arrow {
+      width: 34px; height: 34px; min-width: 34px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 50%;
+      background: none;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; padding: 0;
+      transition: transform 0.45s var(--ease-spring), border-color 0.3s ease, background 0.3s ease;
+      flex-shrink: 0;
+    }
+    .svc-arrow svg {
+      width: 13px; height: 13px;
+      stroke: rgba(255,255,255,0.38);
+      fill: none; stroke-width: 1.8;
+      stroke-linecap: round; stroke-linejoin: round;
+      transition: stroke 0.3s ease;
+    }
+    .svc-row.open .svc-arrow {
+      transform: rotate(180deg);
+      border-color: rgba(201,169,110,0.5);
+      background: rgba(201,169,110,0.09);
+    }
+    .svc-row.open .svc-arrow svg { stroke: var(--gold); }
+
+    /* Expand panel — grid-row trick for smooth height */
+    .svc-expand {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.55s var(--ease-spring);
+    }
+    .svc-row.open .svc-expand { grid-template-rows: 1fr; }
+
+    .svc-expand__inner {
+      overflow: hidden;
+      min-height: 0;
+    }
+
+    .svc-expand__content {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: clamp(24px, 3vw, 48px);
+      padding: 4px 20px 44px;
+      align-items: start;
+    }
+
+    .svc-expand__visual {
+      aspect-ratio: 4/3;
+      border-radius: 6px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #2c2c2c 0%, #1c1c1c 100%);
+      flex-shrink: 0;
+    }
+    .svc-expand__visual img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s var(--ease-smooth);
+    }
+    .svc-row.open .svc-expand__visual img { transform: scale(1.03); }
+
+    /* Sub-items list */
+    .svc-subitems {
+      list-style: none;
+      margin-bottom: 22px;
+    }
+    .svc-subitem {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-family: var(--ff-body);
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.58);
+      line-height: 1.3;
+    }
+    .svc-subitem::before {
+      content: '';
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+      opacity: 0.65;
+    }
+
+    .svc-expand__note {
+      font-size: 12px;
+      font-style: italic;
+      color: rgba(255,255,255,0.26);
+      line-height: 1.8;
+      margin-bottom: 26px;
+      font-family: var(--ff-body);
+    }
+
+    /* Book button inside expand */
+    .btn-svc-book {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: var(--gold);
+      color: var(--white);
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 13px 28px;
+      border-radius: 8px;
+      transition: filter 0.25s ease, transform 0.25s ease;
+      white-space: nowrap;
+    }
+    .btn-svc-book:link, .btn-svc-book:visited { color: var(--white); }
+    .btn-svc-book:hover { filter: brightness(1.1); transform: translateY(-2px); }
+
+    @media (max-width: 768px) {
+      .svc-row__header {
+        grid-template-columns: 48px 1fr auto;
+        gap: 0 14px;
+        padding-left: 16px;
+        padding-top: clamp(20px, 4vw, 28px);
+        padding-bottom: clamp(20px, 4vw, 28px);
+      }
+      .svc-row:hover .svc-row__header,
+      .svc-row.open .svc-row__header { padding-left: 22px; }
+      .svc-num { font-size: 32px; align-self: center; }
+      .svc-name { font-size: 20px; }
+      .svc-desc { display: none; } /* shown in expand instead */
+
+      .svc-expand__content {
+        grid-template-columns: 1fr;
+        padding: 0 12px 32px;
+        gap: 20px;
+      }
+      .svc-expand__visual { aspect-ratio: 16/9; }
+      .btn-svc-book { width: 100%; justify-content: center; padding: 14px; }
+    }
+
+    /* ═══════════════════════════════════════
+       GALLERY
+    ═══════════════════════════════════════ */
+    .gallery {
+      background: var(--white);
+      padding-bottom: 0;
+    }
+    .gallery .container { margin-bottom: clamp(40px, 5vw, 64px); }
+
+    /* Carousel wrapper — full bleed */
+    .carousel {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      background: #0D0D0D;
+      user-select: none;
+    }
+
+    .carousel__track {
+      display: flex;
+      will-change: transform;
+      transition: transform 0.72s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .carousel__slide {
+      min-width: 100%;
+      position: relative;
+      aspect-ratio: 16/9;
+      background: #141414;
+      overflow: hidden;
+    }
+    @media (max-width: 600px) {
+      .carousel__slide { aspect-ratio: 4/3; }
+    }
+    .carousel__slide img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+      transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    /* Subtle zoom on active slide */
+    .carousel__slide.active img { transform: scale(1.03); }
+
+    /* Slide counter badge */
+    .carousel__counter {
+      position: absolute;
+      top: 20px; right: 24px;
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      color: rgba(255,255,255,0.5);
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 5px 12px;
+      border-radius: 100px;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Prev / Next arrows */
+    .carousel__prev,
+    .carousel__next {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      z-index: 3;
+      width: 48px; height: 48px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50%;
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.25s ease, border-color 0.25s ease, transform 0.3s ease;
+      padding: 0;
+    }
+    .carousel__prev { left: 20px; }
+    .carousel__next { right: 20px; }
+    .carousel__prev:hover,
+    .carousel__next:hover {
+      background: rgba(201,169,110,0.25);
+      border-color: rgba(201,169,110,0.6);
+      transform: translateY(-50%) scale(1.06);
+    }
+    .carousel__prev svg,
+    .carousel__next svg {
+      width: 16px; height: 16px;
+      stroke: rgba(255,255,255,0.85);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* Dot indicators */
+    .carousel__dots {
+      position: absolute;
+      bottom: 20px;
+      left: 50%; transform: translateX(-50%);
+      display: flex; gap: 8px;
+      z-index: 3;
+    }
+    .carousel__dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.28);
+      border: none; padding: 0; cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease, width 0.35s ease;
+    }
+    .carousel__dot.active {
+      background: var(--gold);
+      width: 22px;
+      border-radius: 3px;
+      transform: none;
+    }
+
+    @media (max-width: 768px) {
+      .carousel__prev,
+      .carousel__next {
+        width: 38px; height: 38px;
+      }
+      .carousel__prev { left: 12px; }
+      .carousel__next { right: 12px; }
+      .carousel__counter { top: 12px; right: 14px; font-size: 9px; }
+    }
+
+    /* ═══════════════════════════════════════
+       ABOUT
+    ═══════════════════════════════════════ */
+    .about { background: var(--white); }
+
+    .about__grid {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: clamp(48px, 6vw, 96px);
+      align-items: center;
+    }
+
+    .about__img-wrap {
+      position: relative;
+      aspect-ratio: 3/4;
+      background: linear-gradient(155deg, #E4E4E4 0%, #CACACA 100%);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .about__img-wrap img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .about__img-label {
+      position: absolute;
+      bottom: 20px; left: 20px;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.22);
+      font-family: var(--ff-body);
+    }
+
+    .about__body {
+      font-size: 14px;
+      font-weight: 300;
+      color: #555;
+      line-height: 1.95;
+      margin-bottom: 44px;
+    }
+    .about__body p + p { margin-top: 20px; }
+
+    .about__stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      border-top: 1px solid var(--border);
+      padding-top: 36px;
+    }
+
+    .stat__number {
+      font-family: var(--ff-display);
+      font-size: 36px;
+      font-weight: 400;
+      color: var(--dark);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .stat__label {
+      font-family: var(--ff-body);
+      font-size: 9.5px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* ═══════════════════════════════════════
+       REVIEWS
+    ═══════════════════════════════════════ */
+    .reviews {
+      background: var(--dark);
+      position: relative;
+      overflow: hidden;
+    }
+    .reviews::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px; height: 500px;
+      background: radial-gradient(ellipse at center, rgba(201,169,110,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .reviews .heading { color: var(--white); }
+    .reviews .eyebrow { color: rgba(201,169,110,0.7); }
+
+    .reviews__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(14px, 1.8vw, 22px);
+    }
+
+    .review-card {
+      background: var(--dark-card);
+      border-radius: 3px;
+      padding: clamp(28px, 3vw, 40px);
+    }
+
+    .review-card__stars {
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--gold);
+      margin-bottom: 22px;
+    }
+
+    .review-card__quote {
+      font-family: var(--ff-display);
+      font-style: italic;
+      font-size: 17px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.87);
+      line-height: 1.75;
+      margin-bottom: 28px;
+    }
+
+    .review-card__attr {
+      font-size: 9.5px;
+      font-weight: 500;
+      letter-spacing: 0.17em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* ═══════════════════════════════════════
+       CONTACT
+    ═══════════════════════════════════════ */
+    .contact { background: var(--white); }
+
+    .contact__grid {
+      display: grid;
+      grid-template-columns: 6fr 5fr;
+      gap: clamp(48px, 6vw, 96px);
+      align-items: start;
+    }
+
+    .contact__phone {
+      display: block;
+      font-family: var(--ff-display);
+      font-size: clamp(36px, 4.5vw, 56px);
+      font-weight: 400;
+      color: var(--dark);
+      letter-spacing: -0.02em;
+      margin: 24px 0 36px;
+      transition: color 0.25s ease;
+    }
+    .contact__phone:link, .contact__phone:visited { color: var(--dark); }
+    .contact__phone:hover { color: var(--gold); }
+
+    .contact__info-item { margin-bottom: 22px; }
+    .contact__info-label {
+      font-family: var(--ff-body);
+      font-size: 9.5px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .contact__info-value {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--dark);
+      line-height: 1.7;
+    }
+
+    .contact__body {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.85;
+      max-width: 400px;
+      margin-bottom: 0;
+    }
+
+    /* Card */
+    .contact__card {
+      background: var(--off-white);
+      border-radius: 3px;
+      padding: clamp(28px, 4vw, 48px);
+      margin-top: 8px;
+    }
+    .contact__card-title {
+      font-family: var(--ff-display);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--dark);
+      margin-bottom: 24px;
+    }
+    .contact__card-info {
+      font-size: 13px;
+      font-weight: 300;
+      color: #555;
+      line-height: 2;
+    }
+    .contact__card-info strong {
+      font-weight: 500;
+      color: var(--dark);
+    }
+    .contact__directions {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 26px;
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--dark);
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 2px;
+      transition: color 0.2s ease;
+    }
+    .contact__directions:link, .contact__directions:visited { color: var(--dark); }
+    .contact__directions:hover { color: var(--gold); }
+
+    /* ═══════════════════════════════════════
+       CTA BANNER
+    ═══════════════════════════════════════ */
+    .cta-banner {
+      background: var(--gold);
+      padding: clamp(80px, 10vw, 130px) clamp(20px, 5vw, 72px);
+      text-align: center;
+    }
+
+    .cta-banner__heading {
+      font-family: var(--ff-display);
+      font-size: clamp(52px, 7vw, 88px);
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      margin-bottom: 18px;
+    }
+
+    .cta-banner__sub {
+      font-size: 14px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.78);
+      margin-bottom: 44px;
+      line-height: 1.75;
+    }
+
+    .btn-banner {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--white);
+      color: var(--dark);
+      font-family: var(--ff-body);
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 18px 38px;
+      border-radius: 8px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .btn-banner:link, .btn-banner:visited { color: var(--dark); }
+    .btn-banner:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.16);
+    }
+
+    /* ═══════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════ */
+    .footer {
+      background: var(--dark);
+      padding: clamp(64px, 8vw, 100px) clamp(20px, 5vw, 72px) 40px;
+    }
+    .footer__inner { max-width: 1320px; margin: 0 auto; }
+
+    .footer__top {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 40px;
+      align-items: start;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      margin-bottom: 28px;
+    }
+
+    .footer__logo-img {
+      height: 34px;
+      width: auto;
+      filter: brightness(0) invert(1);
+    }
+    .footer__logo-text {
+      display: none;
+      flex-direction: column;
+    }
+    .footer__logo-text .wordmark {
+      font-family: var(--ff-logo);
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1;
+    }
+    .footer__logo-text .sub {
+      font-family: var(--ff-body);
+      font-size: 6px;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-top: 4px;
+    }
+
+    .footer__nav {
+      display: flex;
+      list-style: none;
+      gap: 28px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .footer__nav a {
+      font-family: var(--ff-body);
+      font-size: 9.5px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.42);
+      transition: color 0.2s ease;
+    }
+    .footer__nav a:link, .footer__nav a:visited { color: rgba(255,255,255,0.42); }
+    .footer__nav a:hover { color: rgba(255,255,255,0.85); }
+
+    .footer__address {
+      text-align: right;
+    }
+    .footer__address p {
+      font-family: var(--ff-body);
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.38);
+      line-height: 2;
+    }
+    .footer__address a {
+      color: rgba(255,255,255,0.38);
+      transition: color 0.2s ease;
+    }
+    .footer__address a:link, .footer__address a:visited { color: rgba(255,255,255,0.38); }
+    .footer__address a:hover { color: rgba(255,255,255,0.7); }
+
+    .footer__bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer__copy {
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.22);
+      letter-spacing: 0.06em;
+    }
+
+    /* ═══════════════════════════════════════
+       RESPONSIVE — TABLET
+    ═══════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .reviews__grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ═══════════════════════════════════════
+       RESPONSIVE — MOBILE
+    ═══════════════════════════════════════ */
+    @media (max-width: 768px) {
+      :root {
+        --topbar-h: 34px;
+        --nav-h: 60px;
+        --header-h: 94px;
+      }
+
+      /* Nav mobile layout */
+      .nav__inner {
+        display: grid;
+        grid-template-columns: 44px 1fr auto;
+        padding: 0 16px;
+      }
+      .nav__hamburger { display: flex; }
+      .nav__links { display: none; }
+      .nav__logo { justify-content: center; }
+      .nav__right .btn-book { display: none; }
+      .mobile-overlay { display: block; }
+
+      /* Hero */
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: 92vh;
+      }
+      .hero__visual { display: none; }
+      .hero__content {
+        padding: clamp(48px, 8vw, 80px) clamp(20px, 6vw, 36px) 72px;
+        background: linear-gradient(180deg, #F5F5F5 0%, var(--white) 40%);
+        min-height: calc(92vh - var(--header-h));
+        justify-content: flex-end;
+      }
+      .hero__ctas { flex-direction: column; }
+      .btn-primary, .btn-ghost { width: 100%; }
+      .hero__sub { max-width: 100%; }
+
+      /* About */
+      .about__grid { grid-template-columns: 1fr; }
+      .about__img-wrap { display: none; }
+
+      /* Reviews */
+      .reviews__grid { grid-template-columns: 1fr; }
+
+      /* Contact */
+      .contact__grid { grid-template-columns: 1fr; }
+
+      /* Footer */
+      .footer__top {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 32px;
+      }
+      .footer__logo-img { margin: 0 auto; }
+      .footer__logo-text { align-items: center; }
+      .footer__address { text-align: center; }
+      .footer__bottom { justify-content: center; }
+    }
+
+    @media (max-width: 520px) {
+      .about__stats { gap: 14px; }
+      .stat__number { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     FIXED SITE HEADER
+═══════════════════════════════════════ -->
+<header class="site-header" id="site-header">
+
+  <!-- 1. ANNOUNCEMENT BAR -->
+  <div class="topbar" id="topbar">
+    <p class="topbar__text"
+       data-en="Walk-ins welcome · UBC AMS Nest · Open daily 10:30am – 6:30pm"
+       data-zh="欢迎直接到店 · UBC AMS大楼 · 每日营业 10:30am – 6:30pm">
+      Walk-ins welcome · UBC AMS Nest · Open daily 10:30am – 6:30pm
+    </p>
+  </div>
+
+  <!-- 2. NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+
+      <!-- Mobile hamburger -->
+      <button class="nav__hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <!-- Logo -->
+      <a href="#" class="nav__logo" aria-label="Number 5 Hair Salon">
+        <img class="nav__logo-img" src="Number5HairSalonLogo.svg" alt="Number 5 Hair Salon"
+             id="nav-logo-img"
+             onerror="this.style.display='none'; document.getElementById('nav-logo-text').style.display='flex';">
+        <div class="nav__logo-text" id="nav-logo-text">
+          <span class="wordmark">Number5</span>
+          <span class="sub">Hair Salon</span>
+        </div>
+      </a>
+
+      <!-- Right cluster -->
+      <div class="nav__right">
+        <ul class="nav__links" role="list">
+          <li><a href="#services" data-en="Services" data-zh="服务">Services</a></li>
+          <li><a href="#gallery"  data-en="Gallery"  data-zh="相册">Gallery</a></li>
+          <li><a href="#about"    data-en="About"    data-zh="关于我们">About</a></li>
+          <li><a href="#reviews"  data-en="Reviews"  data-zh="评价">Reviews</a></li>
+          <li><a href="#contact"  data-en="Contact"  data-zh="联系我们">Contact</a></li>
+        </ul>
+
+        <div class="lang-toggle" role="group" aria-label="Language selection">
+          <button class="lang-btn active" id="btn-en"  onclick="setLang('en')">EN</button>
+          <button class="lang-btn"        id="btn-zh"  onclick="setLang('zh')">中文</button>
+        </div>
+
+        <a href="tel:6045598998" class="btn-book">
+          <span data-en="Book Now" data-zh="预约">Book Now</span>
+        </a>
+      </div>
+
+    </div>
+  </nav>
+
+</header>
+
+<!-- Mobile overlay + drawer -->
+<div class="mobile-overlay" id="mobileOverlay" aria-hidden="true"></div>
+<div class="mobile-drawer" id="mobileDrawer" role="dialog" aria-label="Navigation menu" aria-modal="true">
+  <a href="#services" class="mobile-drawer__link" data-en="Services" data-zh="服务"    onclick="closeDrawer()">Services</a>
+  <a href="#gallery"  class="mobile-drawer__link" data-en="Gallery"  data-zh="相册"    onclick="closeDrawer()">Gallery</a>
+  <a href="#about"    class="mobile-drawer__link" data-en="About"    data-zh="关于我们" onclick="closeDrawer()">About</a>
+  <a href="#reviews"  class="mobile-drawer__link" data-en="Reviews"  data-zh="评价"    onclick="closeDrawer()">Reviews</a>
+  <a href="#contact"  class="mobile-drawer__link" data-en="Contact"  data-zh="联系我们" onclick="closeDrawer()">Contact</a>
+  <div class="mobile-drawer__footer">
+    <div class="lang-toggle" role="group" aria-label="Language selection">
+      <button class="lang-btn active" onclick="setLang('en'); closeDrawer()">EN</button>
+      <button class="lang-btn"        onclick="setLang('zh'); closeDrawer()">中文</button>
+    </div>
+    <a href="tel:6045598998" class="btn-book"
+       data-en="Call to Book" data-zh="致电预约">Call to Book</a>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     3. HERO
+═══════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero__content">
+    <div class="hero__line"></div>
+    <p class="hero__eyebrow"
+       data-en="Hair Salon · UBC Campus, Vancouver"
+       data-zh="美发沙龙 · 温哥华UBC校园">
+      Hair Salon · UBC Campus, Vancouver
+    </p>
+    <h1 class="hero__h1">
+      <span data-en="Your Best" data-zh="校园里的">Your Best</span><br>
+      <em><span data-en="Cut at UBC." data-zh="专业美发。">Cut at UBC.</span></em>
+    </h1>
+    <p class="hero__sub"
+       data-en="Professional cuts, colour, and styling for the UBC community. Walk-ins welcome — clean, affordable, and right at the AMS Nest."
+       data-zh="为UBC师生提供专业剪发、染发和造型服务。欢迎直接到店，价格实惠，就在AMS大楼内。">
+      Professional cuts, colour, and styling for the UBC community. Walk-ins welcome — clean, affordable, and right at the AMS Nest.
+    </p>
+    <div class="hero__ctas">
+      <a href="tel:6045598998" class="btn-primary"
+         data-en="Call to Book" data-zh="致电预约">Call to Book</a>
+      <a href="#services" class="btn-ghost"
+         data-en="Our Services" data-zh="查看服务">Our Services</a>
+    </div>
+  </div>
+
+  <div class="hero__visual" aria-hidden="true">
+    <img src="photos/HeroImage.jpg" alt="Number 5 Hair Salon interior"
+         loading="lazy"
+         onerror="this.style.display='none';">
+    <p class="hero__visual-label"
+       data-en="Number 5 Hair Salon · UBC"
+       data-zh="Number 5 美发沙龙 · UBC">
+      Number 5 Hair Salon · UBC
+    </p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     3b. AMS NEST LOCATION BAND
+═══════════════════════════════════════ -->
+<div class="nest-band reveal">
+  <div class="nest-band__inner">
+    <div class="nest-band__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+        <circle cx="12" cy="9" r="2.5"/>
+      </svg>
+    </div>
+    <div class="nest-band__content">
+      <p class="nest-band__label"
+         data-en="Location" data-zh="我们的位置">Location</p>
+      <p class="nest-band__title">
+        <span data-en="Inside the " data-zh="位于">Inside the </span><em><span data-en="UBC AMS Nest" data-zh="UBC AMS大楼">UBC AMS Nest</span></em>
+      </p>
+    </div>
+    <div class="nest-band__divider" aria-hidden="true"></div>
+    <div class="nest-band__details">
+      <p class="nest-band__detail">
+        <strong data-en="Unit 401" data-zh="401单元">Unit 401</strong>
+        <span data-en=" · 6133 University Boulevard, Vancouver BC"
+              data-zh=" · 温哥华大学大道6133号"> · 6133 University Boulevard, Vancouver BC</span>
+      </p>
+      <p class="nest-band__detail"
+         data-en="Second floor of the AMS Student Nest — steps from the bus loop"
+         data-zh="AMS学生大楼二楼，紧邻公交总站">
+        Second floor of the AMS Student Nest — steps from the bus loop
+      </p>
+    </div>
+    <a href="https://www.google.com/maps/place/6133+University+Blvd,+Vancouver,+BC+V6T+1Z1/@49.2658618,-123.2492087,3a,75y,330.58h,90t/data=!3m4!1e1!3m2!1sQYRJg4iYZb49x1P-jKNZkw!2e0!4m2!3m1!1s0x548672b7acae9ced:0x3030c2012e5cb3fd"
+       target="_blank" rel="noopener noreferrer"
+       class="nest-band__link"
+       data-en="Get Directions →"
+       data-zh="获取路线 →">Get Directions →</a>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     4. SERVICES
+═══════════════════════════════════════ -->
+<section class="section services" id="services" aria-labelledby="services-heading">
+  <div class="container">
+    <p class="eyebrow reveal"
+       data-en="What We Do" data-zh="服务项目">What We Do</p>
+    <h2 class="heading reveal d1" id="services-heading"
+        data-en="What We Do." data-zh="我们的服务。">What We Do.</h2>
+    <p class="subtext reveal d2"
+       data-en="Quality cuts and styling at prices that work for students and staff alike."
+       data-zh="专业剪发与造型，价格实惠，适合学生与教职员。">
+      Quality cuts and styling at prices that work for students and staff alike.
+    </p>
+
+    <ol class="svc-list" aria-label="Services">
+
+      <!-- 01 Men's Haircut -->
+      <li class="svc-row reveal d1">
+        <div class="svc-row__header" role="button" tabindex="0" aria-expanded="false"
+             aria-controls="svc-expand-01"
+             data-en-label="Men's Haircut" data-zh-label="男士剪发">
+          <span class="svc-num" aria-hidden="true">01</span>
+          <div class="svc-name" data-en="Men's Haircut" data-zh="男士剪发">Men's Haircut</div>
+          <p class="svc-desc"
+             data-en="Scissor or clipper cut, includes shampoo and blow dry"
+             data-zh="剪刀或推剪，含洗发吹干">Scissor or clipper cut, includes shampoo and blow dry</p>
+          <button class="svc-arrow" aria-label="Expand" tabindex="-1">
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+        </div>
+        <div class="svc-expand" id="svc-expand-01">
+          <div class="svc-expand__inner">
+            <div class="svc-expand__content">
+              <div class="svc-expand__visual">
+                <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=700&q=80&auto=format&fit=crop"
+                     alt="Men's haircut"
+                     onerror="this.style.display='none'">
+              </div>
+              <div class="svc-expand__body">
+                <ul class="svc-subitems">
+                  <li class="svc-subitem" data-en="Classic scissor cut" data-zh="经典剪刀剪">Classic scissor cut</li>
+                  <li class="svc-subitem" data-en="Taper &amp; fade" data-zh="渐变 &amp; 推剪">Taper &amp; fade</li>
+                  <li class="svc-subitem" data-en="Clipper cut" data-zh="电推剪">Clipper cut</li>
+                  <li class="svc-subitem" data-en="Kids cut" data-zh="儿童剪发">Kids cut</li>
+                </ul>
+                <p class="svc-expand__note"
+                   data-en="Includes shampoo and blow dry. Bring a reference photo for best results."
+                   data-zh="含洗发吹干。建议携带参考发型照片。">
+                  Includes shampoo and blow dry. Bring a reference photo for best results.
+                </p>
+                <a href="tel:6045598998" class="btn-svc-book">
+                  <span data-en="Call to Book" data-zh="致电预约">Call to Book</span>
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <!-- 02 Women's Haircut -->
+      <li class="svc-row reveal d2">
+        <div class="svc-row__header" role="button" tabindex="0" aria-expanded="false"
+             aria-controls="svc-expand-02">
+          <span class="svc-num" aria-hidden="true">02</span>
+          <div class="svc-name" data-en="Women's Haircut" data-zh="女士剪发">Women's Haircut</div>
+          <p class="svc-desc"
+             data-en="Precision cut tailored to your style, includes shampoo"
+             data-zh="精准剪发，含洗发">Precision cut tailored to your style, includes shampoo</p>
+          <button class="svc-arrow" aria-label="Expand" tabindex="-1">
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+        </div>
+        <div class="svc-expand" id="svc-expand-02">
+          <div class="svc-expand__inner">
+            <div class="svc-expand__content">
+              <div class="svc-expand__visual">
+                <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=700&q=80&auto=format&fit=crop"
+                     alt="Women's haircut"
+                     onerror="this.style.display='none'">
+              </div>
+              <div class="svc-expand__body">
+                <ul class="svc-subitems">
+                  <li class="svc-subitem" data-en="Precision trim" data-zh="精准修剪">Precision trim</li>
+                  <li class="svc-subitem" data-en="Layered cut" data-zh="层次感剪发">Layered cut</li>
+                  <li class="svc-subitem" data-en="Bob &amp; lob" data-zh="波波头 &amp; 长波波头">Bob &amp; lob</li>
+                  <li class="svc-subitem" data-en="Fringe &amp; bangs" data-zh="刘海修剪">Fringe &amp; bangs</li>
+                </ul>
+                <p class="svc-expand__note"
+                   data-en="Includes shampoo. Our stylists speak Mandarin and English — show us a photo."
+                   data-zh="含洗发。我们的发型师会说普通话和英语，欢迎带照片来。">
+                  Includes shampoo. Our stylists speak Mandarin and English — show us a photo.
+                </p>
+                <a href="tel:6045598998" class="btn-svc-book">
+                  <span data-en="Call to Book" data-zh="致电预约">Call to Book</span>
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <!-- 03 Shampoo & Conditioning -->
+      <li class="svc-row reveal d3">
+        <div class="svc-row__header" role="button" tabindex="0" aria-expanded="false"
+             aria-controls="svc-expand-03">
+          <span class="svc-num" aria-hidden="true">03</span>
+          <div class="svc-name" data-en="Shampoo &amp; Conditioning" data-zh="洗发护发">Shampoo &amp; Conditioning</div>
+          <p class="svc-desc"
+             data-en="Full wash, condition, and blow dry service"
+             data-zh="洗发、护发、吹干">Full wash, condition, and blow dry service</p>
+          <button class="svc-arrow" aria-label="Expand" tabindex="-1">
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+        </div>
+        <div class="svc-expand" id="svc-expand-03">
+          <div class="svc-expand__inner">
+            <div class="svc-expand__content">
+              <div class="svc-expand__visual">
+                <img src="https://images.unsplash.com/photo-1560869713-7d0a29430803?w=700&q=80&auto=format&fit=crop"
+                     alt="Hair wash and conditioning"
+                     onerror="this.style.display='none'">
+              </div>
+              <div class="svc-expand__body">
+                <ul class="svc-subitems">
+                  <li class="svc-subitem" data-en="Express wash &amp; blow dry" data-zh="快速洗发吹干">Express wash &amp; blow dry</li>
+                  <li class="svc-subitem" data-en="Deep conditioning treatment" data-zh="深层护发护理">Deep conditioning treatment</li>
+                  <li class="svc-subitem" data-en="Scalp massage &amp; treatment" data-zh="头皮按摩护理">Scalp massage &amp; treatment</li>
+                  <li class="svc-subitem" data-en="Available as add-on to any cut" data-zh="可作为剪发附加项目">Available as add-on to any cut</li>
+                </ul>
+                <p class="svc-expand__note"
+                   data-en="Perfect standalone refresh or added to your haircut service."
+                   data-zh="可作为单独护理，也可搭配剪发服务。">
+                  Perfect standalone refresh or added to your haircut service.
+                </p>
+                <a href="tel:6045598998" class="btn-svc-book">
+                  <span data-en="Call to Book" data-zh="致电预约">Call to Book</span>
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <!-- 04 Hair Colouring -->
+      <li class="svc-row reveal d4">
+        <div class="svc-row__header" role="button" tabindex="0" aria-expanded="false"
+             aria-controls="svc-expand-04">
+          <span class="svc-num" aria-hidden="true">04</span>
+          <div class="svc-name" data-en="Hair Colouring" data-zh="染发">Hair Colouring</div>
+          <p class="svc-desc"
+             data-en="Full colour, highlights, and touch-ups"
+             data-zh="全染、挑染及补色">Full colour, highlights, and touch-ups</p>
+          <button class="svc-arrow" aria-label="Expand" tabindex="-1">
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+        </div>
+        <div class="svc-expand" id="svc-expand-04">
+          <div class="svc-expand__inner">
+            <div class="svc-expand__content">
+              <div class="svc-expand__visual">
+                <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=700&q=80&auto=format&fit=crop"
+                     alt="Hair colouring"
+                     onerror="this.style.display='none'">
+              </div>
+              <div class="svc-expand__body">
+                <ul class="svc-subitems">
+                  <li class="svc-subitem" data-en="Full colour" data-zh="全头染发">Full colour</li>
+                  <li class="svc-subitem" data-en="Highlights &amp; balayage" data-zh="挑染 &amp; 渐变染">Highlights &amp; balayage</li>
+                  <li class="svc-subitem" data-en="Root touch-up" data-zh="发根补色">Root touch-up</li>
+                  <li class="svc-subitem" data-en="Toner &amp; gloss" data-zh="护色调色">Toner &amp; gloss</li>
+                </ul>
+                <p class="svc-expand__note"
+                   data-en="Pricing varies by hair length and technique. Consultation included."
+                   data-zh="价格因发长和染发技术不同而有所差异，含咨询服务。">
+                  Pricing varies by hair length and technique. Consultation included.
+                </p>
+                <a href="tel:6045598998" class="btn-svc-book">
+                  <span data-en="Call to Book" data-zh="致电预约">Call to Book</span>
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <!-- 05 Perms & Treatment -->
+      <li class="svc-row reveal d5">
+        <div class="svc-row__header" role="button" tabindex="0" aria-expanded="false"
+             aria-controls="svc-expand-05">
+          <span class="svc-num" aria-hidden="true">05</span>
+          <div class="svc-name" data-en="Perms &amp; Treatment" data-zh="烫发与护理">Perms &amp; Treatment</div>
+          <p class="svc-desc"
+             data-en="Curls, waves, straightening, and deep treatment"
+             data-zh="卷发、波浪、直发及深层护理">Curls, waves, straightening, and deep treatment</p>
+          <button class="svc-arrow" aria-label="Expand" tabindex="-1">
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+        </div>
+        <div class="svc-expand" id="svc-expand-05">
+          <div class="svc-expand__inner">
+            <div class="svc-expand__content">
+              <div class="svc-expand__visual">
+                <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=700&q=80&auto=format&fit=crop"
+                     alt="Perms and hair treatment"
+                     onerror="this.style.display='none'">
+              </div>
+              <div class="svc-expand__body">
+                <ul class="svc-subitems">
+                  <li class="svc-subitem" data-en="Digital perm" data-zh="数码烫">Digital perm</li>
+                  <li class="svc-subitem" data-en="Cold perm &amp; wave" data-zh="冷烫 &amp; 波浪烫">Cold perm &amp; wave</li>
+                  <li class="svc-subitem" data-en="Keratin straightening" data-zh="角蛋白直发护理">Keratin straightening</li>
+                  <li class="svc-subitem" data-en="Deep conditioning mask" data-zh="深层护发发膜">Deep conditioning mask</li>
+                </ul>
+                <p class="svc-expand__note"
+                   data-en="Service time varies by hair type. Ask us what's right for your hair."
+                   data-zh="服务时间因发质而异，欢迎咨询最适合您的方案。">
+                  Service time varies by hair type. Ask us what's right for your hair.
+                </p>
+                <a href="tel:6045598998" class="btn-svc-book">
+                  <span data-en="Call to Book" data-zh="致电预约">Call to Book</span>
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <!-- 06 Styling -->
+      <li class="svc-row reveal d6">
+        <div class="svc-row__header" role="button" tabindex="0" aria-expanded="false"
+             aria-controls="svc-expand-06">
+          <span class="svc-num" aria-hidden="true">06</span>
+          <div class="svc-name" data-en="Styling" data-zh="造型">Styling</div>
+          <p class="svc-desc"
+             data-en="Blowout, flat iron, or special occasion styling"
+             data-zh="吹造型、直板夹或特殊场合造型">Blowout, flat iron, or special occasion styling</p>
+          <button class="svc-arrow" aria-label="Expand" tabindex="-1">
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+        </div>
+        <div class="svc-expand" id="svc-expand-06">
+          <div class="svc-expand__inner">
+            <div class="svc-expand__content">
+              <div class="svc-expand__visual">
+                <img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=700&q=80&auto=format&fit=crop"
+                     alt="Hair styling"
+                     onerror="this.style.display='none'">
+              </div>
+              <div class="svc-expand__body">
+                <ul class="svc-subitems">
+                  <li class="svc-subitem" data-en="Blowout &amp; blow dry" data-zh="吹风造型">Blowout &amp; blow dry</li>
+                  <li class="svc-subitem" data-en="Flat iron &amp; straighten" data-zh="直板夹造型">Flat iron &amp; straighten</li>
+                  <li class="svc-subitem" data-en="Curling &amp; waves" data-zh="卷发造型">Curling &amp; waves</li>
+                  <li class="svc-subitem" data-en="Event &amp; occasion styling" data-zh="活动场合特别造型">Event &amp; occasion styling</li>
+                </ul>
+                <p class="svc-expand__note"
+                   data-en="Walk-in styling available daily. Book ahead for events and special occasions."
+                   data-zh="每日欢迎直接到店造型。活动特别场合建议提前预约。">
+                  Walk-in styling available daily. Book ahead for events and special occasions.
+                </p>
+                <a href="tel:6045598998" class="btn-svc-book">
+                  <span data-en="Call to Book" data-zh="致电预约">Call to Book</span>
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+    </ol>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     5. GALLERY
+═══════════════════════════════════════ -->
+<section class="section gallery" id="gallery" aria-labelledby="gallery-heading">
+  <div class="container">
+    <p class="eyebrow reveal"
+       data-en="The Salon" data-zh="沙龙风采">The Salon</p>
+    <h2 class="heading reveal d1" id="gallery-heading"
+        data-en="Our Space." data-zh="我们的空间。">Our Space.</h2>
+    <p class="subtext reveal d2"
+       data-en="A clean, welcoming space right in the heart of UBC. See for yourself."
+       data-zh="干净温馨的空间，就在UBC校园中心。欢迎亲眼来看看。">
+      A clean, welcoming space right in the heart of UBC. See for yourself.
+    </p>
+  </div>
+
+  <div class="carousel" id="galleryCarousel"
+       aria-label="Salon photo gallery"
+       role="region">
+
+    <div class="carousel__track" id="carouselTrack">
+      <div class="carousel__slide active">
+        <img src="photos/Gallery_photos/Gallary_photo_1.jpg"
+             alt="Number 5 Hair Salon — photo 1" loading="lazy">
+      </div>
+      <div class="carousel__slide">
+        <img src="photos/Gallery_photos/Gallary_photo_2.jpg"
+             alt="Number 5 Hair Salon — photo 2" loading="lazy">
+      </div>
+      <div class="carousel__slide">
+        <img src="photos/Gallery_photos/Gallary_photo_3.jpg"
+             alt="Number 5 Hair Salon — photo 3" loading="lazy">
+      </div>
+      <div class="carousel__slide">
+        <img src="photos/Gallery_photos/Gallary_photo_4.jpg"
+             alt="Number 5 Hair Salon — photo 4" loading="lazy">
+      </div>
+      <div class="carousel__slide">
+        <img src="photos/Gallery_photos/Gallary_photo_5.jpg"
+             alt="Number 5 Hair Salon — photo 5" loading="lazy">
+      </div>
+      <div class="carousel__slide">
+        <img src="photos/Gallery_photos/Gallary_photo_6.jpg"
+             alt="Number 5 Hair Salon — photo 6" loading="lazy">
+      </div>
+      <div class="carousel__slide">
+        <img src="photos/Gallery_photos/Gallary_photo_7.jpg"
+             alt="Number 5 Hair Salon — photo 7" loading="lazy">
+      </div>
+    </div>
+
+    <!-- Counter -->
+    <div class="carousel__counter" id="carouselCounter" aria-live="polite">1 / 7</div>
+
+    <!-- Arrows -->
+    <button class="carousel__prev" id="carouselPrev" aria-label="Previous photo">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="carousel__next" id="carouselNext" aria-label="Next photo">
+      <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+    </button>
+
+    <!-- Dots -->
+    <div class="carousel__dots" role="tablist" aria-label="Gallery slides">
+      <button class="carousel__dot active" role="tab" aria-selected="true"  aria-label="Photo 1"></button>
+      <button class="carousel__dot"        role="tab" aria-selected="false" aria-label="Photo 2"></button>
+      <button class="carousel__dot"        role="tab" aria-selected="false" aria-label="Photo 3"></button>
+      <button class="carousel__dot"        role="tab" aria-selected="false" aria-label="Photo 4"></button>
+      <button class="carousel__dot"        role="tab" aria-selected="false" aria-label="Photo 5"></button>
+      <button class="carousel__dot"        role="tab" aria-selected="false" aria-label="Photo 6"></button>
+      <button class="carousel__dot"        role="tab" aria-selected="false" aria-label="Photo 7"></button>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     6. ABOUT (was 5)
+═══════════════════════════════════════ -->
+<section class="section about" id="about" aria-labelledby="about-heading">
+  <div class="container">
+    <div class="about__grid">
+
+      <!-- Image -->
+      <div class="about__img-wrap reveal">
+        <img src="photos/InsideShot.jpg" alt="Number 5 Hair Salon interior"
+             loading="lazy"
+             onerror="this.style.display='none';">
+        <p class="about__img-label"
+           data-en="AMS Nest · Vancouver" data-zh="AMS大楼 · 温哥华">
+          AMS Nest · Vancouver
+        </p>
+      </div>
+
+      <!-- Text -->
+      <div class="about__text">
+        <p class="eyebrow reveal"
+           data-en="About Us" data-zh="关于我们">About Us</p>
+        <h2 class="heading reveal d1" id="about-heading">
+          <span data-en="Your Neighbourhood" data-zh="UBC校园内的">Your Neighbourhood</span><br>
+          <span data-en="Salon at UBC." data-zh="专属美发沙龙。">Salon at UBC.</span>
+        </h2>
+
+        <div class="about__body reveal d2">
+          <p data-en="Number 5 Hair Salon is located right at the UBC AMS Nest, making it the most convenient salon on campus. With friendly, professional stylists and reasonable prices, we've become the go-to spot for students, faculty, and UBC community members."
+             data-zh="Number 5 Hair Salon 位于UBC AMS大楼内，是校园内最便捷的美发沙龙。我们拥有专业友好的发型师，价格实惠，深受学生和教职员的喜爱。">
+            Number 5 Hair Salon is located right at the UBC AMS Nest, making it the most convenient salon on campus. With friendly, professional stylists and reasonable prices, we've become the go-to spot for students, faculty, and UBC community members.
+          </p>
+          <p data-en="Walk-ins are always welcome. Our team speaks Mandarin and English — just show us a photo of what you're looking for and we'll make it happen."
+             data-zh="欢迎直接到店。我们的团队会说普通话和英语 — 带上您喜欢的发型照片，我们一定能为您实现。">
+            Walk-ins are always welcome. Our team speaks Mandarin and English — just show us a photo of what you're looking for and we'll make it happen.
+          </p>
+        </div>
+
+        <div class="about__stats reveal d3">
+          <div class="stat">
+            <div class="stat__number">191+</div>
+            <div class="stat__label"
+                 data-en="Google Reviews" data-zh="谷歌评价">Google Reviews</div>
+          </div>
+          <div class="stat">
+            <div class="stat__number">4.7★</div>
+            <div class="stat__label"
+                 data-en="Rating" data-zh="评分">Rating</div>
+          </div>
+          <div class="stat">
+            <div class="stat__number"
+                 data-en="Walk-ins" data-zh="随时">Walk-ins</div>
+            <div class="stat__label"
+                 data-en="Always Welcome" data-zh="随时欢迎">Always Welcome</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     6. REVIEWS
+═══════════════════════════════════════ -->
+<section class="section reviews" id="reviews" aria-labelledby="reviews-heading">
+  <div class="container">
+    <p class="eyebrow reveal"
+       data-en="Client Reviews" data-zh="客户反馈">Client Reviews</p>
+    <h2 class="heading reveal d1" id="reviews-heading"
+        data-en="What Clients Say." data-zh="客户评价。">What Clients Say.</h2>
+
+    <div class="reviews__grid">
+
+      <div class="review-card reveal d1">
+        <div class="review-card__stars" aria-label="5 stars">★★★★★</div>
+        <blockquote class="review-card__quote">
+          "The barber was very professional and gave me exactly the haircut I wanted with shampoo and hair drying. The service was top-notch, and the salon itself is clean and welcoming. The price was very reasonable for the quality of service I received."
+        </blockquote>
+        <p class="review-card__attr">Hana &nbsp;·&nbsp; Google Review</p>
+      </div>
+
+      <div class="review-card reveal d2">
+        <div class="review-card__stars" aria-label="5 stars">★★★★★</div>
+        <blockquote class="review-card__quote">
+          "Best hair salon. The owner is super friendly and will style your hair as you please. The prices are super affordable and perfect especially for students."
+        </blockquote>
+        <p class="review-card__attr">Brian Lee &nbsp;·&nbsp; Google Review</p>
+      </div>
+
+      <div class="review-card reveal d3">
+        <div class="review-card__stars" aria-label="5 stars">★★★★★</div>
+        <blockquote class="review-card__quote">
+          "I showed them a few photos of what I was looking for and was extremely happy with the cut. The price was very reasonable even after tips!"
+        </blockquote>
+        <p class="review-card__attr">Ling T &nbsp;·&nbsp; Google Review</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     7. CONTACT
+═══════════════════════════════════════ -->
+<section class="section contact" id="contact" aria-labelledby="contact-heading">
+  <div class="container">
+    <div class="contact__grid">
+
+      <!-- Left -->
+      <div class="contact__left">
+        <p class="eyebrow reveal"
+           data-en="Find Us" data-zh="联系我们">Find Us</p>
+        <h2 class="heading reveal d1" id="contact-heading"
+            data-en="Find Us at UBC." data-zh="在UBC找到我们。">Find Us at UBC.</h2>
+        <p class="contact__body reveal d2"
+           data-en="Right inside the AMS Nest building on University Boulevard. Easy to find, free to walk in."
+           data-zh="就在大学大道AMS大楼内。方便找到，欢迎直接到访。">
+          Right inside the AMS Nest building on University Boulevard. Easy to find, free to walk in.
+        </p>
+        <a href="tel:6045598998" class="contact__phone reveal d3"
+           aria-label="Call us at 604-559-8998">604-559-8998</a>
+
+        <div class="contact__info-item reveal d4">
+          <p class="contact__info-label" data-en="Address" data-zh="地址">Address</p>
+          <p class="contact__info-value">
+            401-6133 University Boulevard<br>Vancouver BC V6T 1Z1
+          </p>
+        </div>
+
+        <div class="contact__info-item reveal d5">
+          <p class="contact__info-label" data-en="Hours" data-zh="营业时间">Hours</p>
+          <p class="contact__info-value"
+             data-en="Mon – Sun &nbsp; 10:30am – 6:30pm"
+             data-zh="周一至周日 &nbsp; 上午10:30 – 下午6:30">
+            Mon – Sun &nbsp; 10:30am – 6:30pm
+          </p>
+        </div>
+      </div>
+
+      <!-- Right card -->
+      <div class="contact__card reveal d2">
+        <p class="contact__card-title"
+           data-en="Visit Us" data-zh="前来造访">Visit Us</p>
+        <div class="contact__card-info">
+          <p><strong>Number 5 Hair Salon</strong></p>
+          <p>401-6133 University Boulevard</p>
+          <p>Vancouver BC &nbsp; V6T 1Z1</p>
+          <br>
+          <p>
+            <span data-en="Hours" data-zh="营业时间">Hours</span><br>
+            <span data-en="Mon–Sun, 10:30am – 6:30pm"
+                  data-zh="周一至周日，10:30am – 6:30pm">Mon–Sun, 10:30am – 6:30pm</span>
+          </p>
+          <br>
+          <p>
+            <span data-en="Phone" data-zh="电话">Phone</span><br>
+            <a href="tel:6045598998">604-559-8998</a>
+          </p>
+          <br>
+          <p data-en="Walk-ins welcome daily."
+             data-zh="每日欢迎直接到访。">Walk-ins welcome daily.</p>
+          <p data-en="Mandarin &amp; English spoken."
+             data-zh="提供普通话与英语服务。">Mandarin &amp; English spoken.</p>
+        </div>
+        <a href="https://www.google.com/maps/place/6133+University+Blvd,+Vancouver,+BC+V6T+1Z1/@49.2658618,-123.2492087,3a,75y,330.58h,90t/data=!3m4!1e1!3m2!1sQYRJg4iYZb49x1P-jKNZkw!2e0!4m2!3m1!1s0x548672b7acae9ced:0x3030c2012e5cb3fd"
+           target="_blank" rel="noopener noreferrer"
+           class="contact__directions"
+           data-en="Get Directions →"
+           data-zh="获取路线 →">Get Directions →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     8. CTA BANNER
+═══════════════════════════════════════ -->
+<section class="cta-banner" aria-label="Call to action">
+  <div class="container">
+    <h2 class="cta-banner__heading reveal"
+        data-en="Walk In Today." data-zh="今天就来吧。">Walk In Today.</h2>
+    <p class="cta-banner__sub reveal d1"
+       data-en="No appointment needed. We're open daily at the AMS Nest."
+       data-zh="无需预约，每日开放，就在AMS大楼。">
+      No appointment needed. We're open daily at the AMS Nest.
+    </p>
+    <a href="tel:6045598998" class="btn-banner reveal d2"
+       data-en="Call 604-559-8998"
+       data-zh="致电 604-559-8998">Call 604-559-8998</a>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     9. FOOTER
+═══════════════════════════════════════ -->
+<footer class="footer" role="contentinfo">
+  <div class="footer__inner">
+    <div class="footer__top">
+
+      <!-- Logo -->
+      <div class="footer__logo-wrap">
+        <img class="footer__logo-img"
+             src="Number5HairSalonLogo.svg"
+             alt="Number 5 Hair Salon"
+             id="footer-logo-img"
+             onerror="this.style.display='none'; document.getElementById('footer-logo-text').style.display='flex';">
+        <div class="footer__logo-text" id="footer-logo-text">
+          <span class="wordmark">Number5</span>
+          <span class="sub">Hair Salon</span>
+        </div>
+      </div>
+
+      <!-- Nav links -->
+      <ul class="footer__nav" role="list">
+        <li><a href="#services" data-en="Services" data-zh="服务">Services</a></li>
+        <li><a href="#gallery"  data-en="Gallery"  data-zh="相册">Gallery</a></li>
+        <li><a href="#about"    data-en="About"    data-zh="关于我们">About</a></li>
+        <li><a href="#reviews"  data-en="Reviews"  data-zh="评价">Reviews</a></li>
+        <li><a href="#contact"  data-en="Contact"  data-zh="联系我们">Contact</a></li>
+      </ul>
+
+      <!-- Address -->
+      <div class="footer__address">
+        <p>401-6133 University Boulevard</p>
+        <p>Vancouver BC &nbsp; V6T 1Z1</p>
+        <p style="margin-top: 10px;">
+          <a href="tel:6045598998">604-559-8998</a>
+        </p>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom">
+      <p class="footer__copy"
+         data-en="© 2026 Number 5 Hair Salon. All rights reserved."
+         data-zh="© 2026 Number 5 Hair Salon 版权所有。">
+        © 2026 Number 5 Hair Salon. All rights reserved.
+      </p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════ -->
+<script>
+  /* ── LANGUAGE SYSTEM ── */
+  const LANG_KEY = 'n5_lang';
+  let currentLang = localStorage.getItem(LANG_KEY) || 'en';
+
+  function setLang(lang) {
+    currentLang = lang;
+    localStorage.setItem(LANG_KEY, lang);
+
+    const isZh = lang === 'zh';
+
+    // Body class
+    document.body.classList.toggle('lang-zh', isZh);
+    document.documentElement.lang = isZh ? 'zh-CN' : 'en';
+
+    // Swap all bilingual text nodes
+    document.querySelectorAll('[data-en]').forEach(el => {
+      el.textContent = isZh ? el.dataset.zh : el.dataset.en;
+    });
+
+    // Sync all lang-toggle buttons
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      const isEnBtn = btn.textContent.trim() === 'EN';
+      btn.classList.toggle('active', isZh ? !isEnBtn : isEnBtn);
+    });
+  }
+
+  // Boot: apply saved language
+  setLang(currentLang);
+
+
+  /* ── SCROLL BEHAVIORS ── */
+  const topbarEl = document.getElementById('topbar');
+  const navEl    = document.getElementById('nav');
+
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    topbarEl.classList.toggle('hidden', y > 50);
+    navEl.classList.toggle('scrolled', y > 50);
+  }, { passive: true });
+
+
+  /* ── MOBILE DRAWER ── */
+  const hamburger     = document.getElementById('hamburger');
+  const mobileOverlay = document.getElementById('mobileOverlay');
+  const mobileDrawer  = document.getElementById('mobileDrawer');
+
+  function openDrawer() {
+    hamburger.classList.add('open');
+    hamburger.setAttribute('aria-expanded', 'true');
+    mobileOverlay.classList.add('open');
+    mobileDrawer.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeDrawer() {
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    mobileOverlay.classList.remove('open');
+    mobileDrawer.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  hamburger.addEventListener('click', () => {
+    mobileDrawer.classList.contains('open') ? closeDrawer() : openDrawer();
+  });
+  mobileOverlay.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+
+
+  /* ── SCROLL REVEAL ── */
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        revealObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+
+  /* ── GALLERY CAROUSEL ── */
+  (function () {
+    const track   = document.getElementById('carouselTrack');
+    const slides  = Array.from(track.querySelectorAll('.carousel__slide'));
+    const dots    = Array.from(document.querySelectorAll('.carousel__dot'));
+    const counter = document.getElementById('carouselCounter');
+    const total   = slides.length;
+    let current   = 0;
+    let autoTimer = null;
+
+    function goTo(idx) {
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      dots[current].setAttribute('aria-selected', 'false');
+
+      current = (idx + total) % total;
+
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+      dots[current].setAttribute('aria-selected', 'true');
+      track.style.transform = `translateX(-${current * 100}%)`;
+      counter.textContent = `${current + 1} / ${total}`;
+    }
+
+    document.getElementById('carouselPrev').addEventListener('click', () => { goTo(current - 1); resetAuto(); });
+    document.getElementById('carouselNext').addEventListener('click', () => { goTo(current + 1); resetAuto(); });
+    dots.forEach((dot, i) => dot.addEventListener('click', () => { goTo(i); resetAuto(); }));
+
+    // Keyboard
+    document.getElementById('galleryCarousel').addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft')  { goTo(current - 1); resetAuto(); }
+      if (e.key === 'ArrowRight') { goTo(current + 1); resetAuto(); }
+    });
+
+    // Autoplay
+    function startAuto() { autoTimer = setInterval(() => goTo(current + 1), 4500); }
+    function stopAuto()  { clearInterval(autoTimer); }
+    function resetAuto() { stopAuto(); startAuto(); }
+
+    const carousel = document.getElementById('galleryCarousel');
+    carousel.addEventListener('mouseenter', stopAuto);
+    carousel.addEventListener('mouseleave', startAuto);
+    startAuto();
+
+    // Touch / swipe
+    let touchStartX = 0;
+    carousel.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    carousel.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 44) {
+        goTo(diff > 0 ? current + 1 : current - 1);
+        resetAuto();
+      }
+    }, { passive: true });
+
+    // Pause when not in viewport (saves battery)
+    const obs = new IntersectionObserver(entries => {
+      entries[0].isIntersecting ? startAuto() : stopAuto();
+    }, { threshold: 0.3 });
+    obs.observe(carousel);
+  })();
+
+  /* ── SERVICE ACCORDION ── */
+  document.querySelectorAll('.svc-row__header').forEach(header => {
+    function toggle() {
+      const row = header.closest('.svc-row');
+      const isOpen = row.classList.contains('open');
+
+      // Close any currently open row
+      document.querySelectorAll('.svc-row.open').forEach(r => {
+        r.classList.remove('open');
+        r.querySelector('.svc-row__header').setAttribute('aria-expanded', 'false');
+      });
+
+      // Open this one if it wasn't already open
+      if (!isOpen) {
+        row.classList.add('open');
+        header.setAttribute('aria-expanded', 'true');
+        // Scroll so the row is visible, but only if it's below the fold
+        setTimeout(() => {
+          const rect = row.getBoundingClientRect();
+          const navHeight = document.getElementById('site-header').offsetHeight;
+          if (rect.top < navHeight + 20) {
+            window.scrollBy({ top: rect.top - navHeight - 20, behavior: 'smooth' });
+          }
+        }, 100);
+      }
+    }
+
+    header.addEventListener('click', toggle);
+    header.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+    });
+  });
+
+  /* ── SMOOTH SCROLL for anchor links ── */
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const id = link.getAttribute('href');
+      if (id === '#') return;
+      const target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
+</body>
+</html>
