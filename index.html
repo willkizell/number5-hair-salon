@@ -9,6 +9,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Dancing+Script:wght@400;600&family=Inter:wght@300;400;500&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
 
+  <!-- Netlify Identity — handles /admin/ login redirect from confirmation emails -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
   <style>
     /* ═══════════════════════════════════════
        VARIABLES
@@ -2325,66 +2328,82 @@
 
 
   /* ── GALLERY CAROUSEL ── */
-  (function () {
-    const track   = document.getElementById('carouselTrack');
-    const slides  = Array.from(track.querySelectorAll('.carousel__slide'));
-    const dots    = Array.from(document.querySelectorAll('.carousel__dot'));
-    const counter = document.getElementById('carouselCounter');
-    const total   = slides.length;
-    let current   = 0;
+  // Exposed as window.__reinitCarousel so the CMS data loader can call it
+  // after rebuilding the slide/dot DOM. AbortController cleanly removes all
+  // listeners from a previous initialisation before re-attaching them.
+  window.__reinitCarousel = (function () {
+    let abortCtrl = null;
     let autoTimer = null;
 
-    function goTo(idx) {
-      slides[current].classList.remove('active');
-      dots[current].classList.remove('active');
-      dots[current].setAttribute('aria-selected', 'false');
+    return function reinit() {
+      // Tear down previous instance
+      if (abortCtrl) abortCtrl.abort();
+      clearInterval(autoTimer);
 
-      current = (idx + total) % total;
+      abortCtrl = new AbortController();
+      const { signal } = abortCtrl;
 
-      slides[current].classList.add('active');
-      dots[current].classList.add('active');
-      dots[current].setAttribute('aria-selected', 'true');
-      track.style.transform = `translateX(-${current * 100}%)`;
-      counter.textContent = `${current + 1} / ${total}`;
-    }
+      const track   = document.getElementById('carouselTrack');
+      const slides  = Array.from(track.querySelectorAll('.carousel__slide'));
+      const dots    = Array.from(document.querySelectorAll('.carousel__dot'));
+      const counter = document.getElementById('carouselCounter');
+      const total   = slides.length;
+      let current   = 0;
 
-    document.getElementById('carouselPrev').addEventListener('click', () => { goTo(current - 1); resetAuto(); });
-    document.getElementById('carouselNext').addEventListener('click', () => { goTo(current + 1); resetAuto(); });
-    dots.forEach((dot, i) => dot.addEventListener('click', () => { goTo(i); resetAuto(); }));
+      function goTo(idx) {
+        slides[current].classList.remove('active');
+        dots[current].classList.remove('active');
+        dots[current].setAttribute('aria-selected', 'false');
 
-    // Keyboard
-    document.getElementById('galleryCarousel').addEventListener('keydown', e => {
-      if (e.key === 'ArrowLeft')  { goTo(current - 1); resetAuto(); }
-      if (e.key === 'ArrowRight') { goTo(current + 1); resetAuto(); }
-    });
+        current = (idx + total) % total;
 
-    // Autoplay
-    function startAuto() { autoTimer = setInterval(() => goTo(current + 1), 4500); }
-    function stopAuto()  { clearInterval(autoTimer); }
-    function resetAuto() { stopAuto(); startAuto(); }
-
-    const carousel = document.getElementById('galleryCarousel');
-    carousel.addEventListener('mouseenter', stopAuto);
-    carousel.addEventListener('mouseleave', startAuto);
-    startAuto();
-
-    // Touch / swipe
-    let touchStartX = 0;
-    carousel.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-    carousel.addEventListener('touchend', e => {
-      const diff = touchStartX - e.changedTouches[0].clientX;
-      if (Math.abs(diff) > 44) {
-        goTo(diff > 0 ? current + 1 : current - 1);
-        resetAuto();
+        slides[current].classList.add('active');
+        dots[current].classList.add('active');
+        dots[current].setAttribute('aria-selected', 'true');
+        track.style.transform = `translateX(-${current * 100}%)`;
+        counter.textContent = `${current + 1} / ${total}`;
       }
-    }, { passive: true });
 
-    // Pause when not in viewport (saves battery)
-    const obs = new IntersectionObserver(entries => {
-      entries[0].isIntersecting ? startAuto() : stopAuto();
-    }, { threshold: 0.3 });
-    obs.observe(carousel);
+      document.getElementById('carouselPrev').addEventListener('click', () => { goTo(current - 1); resetAuto(); }, { signal });
+      document.getElementById('carouselNext').addEventListener('click', () => { goTo(current + 1); resetAuto(); }, { signal });
+      dots.forEach((dot, i) => dot.addEventListener('click', () => { goTo(i); resetAuto(); }, { signal }));
+
+      // Keyboard
+      document.getElementById('galleryCarousel').addEventListener('keydown', e => {
+        if (e.key === 'ArrowLeft')  { goTo(current - 1); resetAuto(); }
+        if (e.key === 'ArrowRight') { goTo(current + 1); resetAuto(); }
+      }, { signal });
+
+      // Autoplay
+      function startAuto() { autoTimer = setInterval(() => goTo(current + 1), 4500); }
+      function stopAuto()  { clearInterval(autoTimer); }
+      function resetAuto() { stopAuto(); startAuto(); }
+
+      const carousel = document.getElementById('galleryCarousel');
+      carousel.addEventListener('mouseenter', stopAuto, { signal });
+      carousel.addEventListener('mouseleave', startAuto, { signal });
+      startAuto();
+
+      // Touch / swipe
+      let touchStartX = 0;
+      carousel.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true, signal });
+      carousel.addEventListener('touchend', e => {
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 44) {
+          goTo(diff > 0 ? current + 1 : current - 1);
+          resetAuto();
+        }
+      }, { passive: true, signal });
+
+      // Pause when not in viewport (saves battery)
+      const obs = new IntersectionObserver(entries => {
+        entries[0].isIntersecting ? startAuto() : stopAuto();
+      }, { threshold: 0.3 });
+      obs.observe(carousel);
+    };
   })();
+
+  window.__reinitCarousel();
 
   /* ── SERVICE ACCORDION ── */
   document.querySelectorAll('.svc-row__header').forEach(header => {
@@ -2430,6 +2449,145 @@
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
+</script>
+
+<!-- ═══════════════════════════════════════
+     CMS DATA LOADER
+     Fetches JSON files written by the admin CMS and applies them to
+     the live page. Falls back gracefully to hardcoded content if any
+     fetch fails or the file doesn't exist yet.
+═══════════════════════════════════════ -->
+<script>
+(async function () {
+  'use strict';
+
+  // Escape user-supplied strings before inserting into HTML attributes
+  function esc(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/"/g, '&quot;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+
+  // Fetch a JSON file; return null on any error (404, network, parse)
+  async function tryJSON(url) {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) return null;
+      return await res.json();
+    } catch (_) {
+      return null;
+    }
+  }
+
+  // Helper: current language ('en' or 'zh')
+  function lang() {
+    return document.documentElement.lang === 'zh-CN' ? 'zh' : 'en';
+  }
+
+  // Fetch all four data files in parallel
+  const [announcement, hero, gallery, services] = await Promise.all([
+    tryJSON('/data/settings/announcement.json'),
+    tryJSON('/data/hero.json'),
+    tryJSON('/data/gallery.json'),
+    tryJSON('/data/services.json')
+  ]);
+
+  // ── 1. ANNOUNCEMENT BAR ──────────────────────────────────
+  if (announcement && announcement.text_en) {
+    const el = document.querySelector('.topbar__text');
+    if (el) {
+      el.dataset.en = announcement.text_en;
+      if (announcement.text_zh) el.dataset.zh = announcement.text_zh;
+      el.textContent = lang() === 'zh'
+        ? (announcement.text_zh || announcement.text_en)
+        : announcement.text_en;
+    }
+  }
+
+  // ── 2. HERO IMAGE ────────────────────────────────────────
+  if (hero && hero.image) {
+    const img = document.querySelector('.hero__visual img');
+    if (img) img.src = hero.image;
+  }
+
+  // ── 3. SERVICES ──────────────────────────────────────────
+  if (services && Array.isArray(services.services)) {
+    services.services.forEach(function (svc, idx) {
+      const num = String(idx + 1).padStart(2, '0');
+      const expandEl = document.getElementById('svc-expand-' + num);
+      if (!expandEl) return;
+      const row = expandEl.closest('.svc-row');
+
+      // Name
+      const nameEl = row && row.querySelector('.svc-name');
+      if (nameEl && svc.name_en) {
+        nameEl.dataset.en = svc.name_en;
+        if (svc.name_zh) nameEl.dataset.zh = svc.name_zh;
+        nameEl.textContent = lang() === 'zh'
+          ? (svc.name_zh || svc.name_en)
+          : svc.name_en;
+      }
+
+      // Short description
+      const descEl = row && row.querySelector('.svc-desc');
+      if (descEl && svc.description_en) {
+        descEl.dataset.en = svc.description_en;
+        if (svc.description_zh) descEl.dataset.zh = svc.description_zh;
+        descEl.textContent = lang() === 'zh'
+          ? (svc.description_zh || svc.description_en)
+          : svc.description_en;
+      }
+
+      // Photo in the expand panel
+      const imgEl = expandEl.querySelector('.svc-expand__visual img');
+      if (imgEl && svc.image) imgEl.src = svc.image;
+    });
+  }
+
+  // ── 4. GALLERY ───────────────────────────────────────────
+  if (gallery && Array.isArray(gallery.photos) && gallery.photos.length > 0) {
+    const track        = document.getElementById('carouselTrack');
+    const dotsContainer = document.querySelector('.carousel__dots');
+    const counter      = document.getElementById('carouselCounter');
+
+    if (track && dotsContainer && counter) {
+      // Rebuild slides
+      track.innerHTML = gallery.photos.map(function (p, i) {
+        var altText = esc(p.alt || ('Number 5 Hair Salon \u2014 photo ' + (i + 1)));
+        var imgSrc  = esc(p.image || '');
+        return '<div class="carousel__slide' + (i === 0 ? ' active' : '') + '">' +
+               '<img src="' + imgSrc + '" alt="' + altText + '" loading="lazy">' +
+               '</div>';
+      }).join('');
+
+      // Rebuild dots
+      dotsContainer.innerHTML = gallery.photos.map(function (_, i) {
+        return '<button class="carousel__dot' + (i === 0 ? ' active' : '') + '"' +
+               ' role="tab" aria-selected="' + (i === 0 ? 'true' : 'false') + '"' +
+               ' aria-label="Photo ' + (i + 1) + '"></button>';
+      }).join('');
+
+      counter.textContent = '1 / ' + gallery.photos.length;
+
+      // Re-init carousel with rebuilt DOM (AbortController cleans up old listeners)
+      if (window.__reinitCarousel) window.__reinitCarousel();
+    }
+  }
+
+  // ── NETLIFY IDENTITY — redirect to /admin/ after login ──
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on('init', function (user) {
+      if (!user) {
+        window.netlifyIdentity.on('login', function () {
+          document.location.href = '/admin/';
+        });
+      }
+    });
+  }
+
+})();
 </script>
 
 </body>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Number 5 Hair Salon</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Netlify Identity — required for Git Gateway auth -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0F0F0F;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    .loading {
+      text-align: center;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .loading__wordmark {
+      font-family: 'Dancing Script', cursive;
+      font-size: 36px;
+      font-weight: 600;
+      color: #C9A96E;
+      letter-spacing: 0.01em;
+      line-height: 1;
+    }
+
+    .loading__sub {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.3);
+      margin-top: 6px;
+    }
+
+    .loading__divider {
+      width: 32px;
+      height: 1px;
+      background: rgba(201, 169, 110, 0.3);
+      margin: 20px auto;
+    }
+
+    .loading__label {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.25);
+    }
+
+    .loading__spinner {
+      width: 22px;
+      height: 22px;
+      border: 2px solid rgba(201, 169, 110, 0.15);
+      border-top-color: #C9A96E;
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+      margin: 18px auto 0;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+  <!-- Shown while Decap CMS JavaScript loads -->
+  <div class="loading" id="loadingScreen">
+    <div class="loading__wordmark">Number 5</div>
+    <div class="loading__sub">Hair Salon</div>
+    <div class="loading__divider"></div>
+    <div class="loading__label">Admin Dashboard</div>
+    <div class="loading__spinner"></div>
+  </div>
+
+  <!--
+    Decap CMS (the maintained successor to Netlify CMS).
+    Once loaded it replaces the entire page with the CMS interface.
+    Authentication is handled by the Netlify Identity widget above.
+  -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+</body>
+</html>

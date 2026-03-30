@@ -1,0 +1,131 @@
+# ─────────────────────────────────────────────────────────
+# Decap CMS configuration — Number 5 Hair Salon
+# Docs: https://decapcms.org/docs/configuration-options/
+#
+# SETUP CHECKLIST (one-time, in Netlify dashboard):
+#  1. Site Settings → Identity → Enable Netlify Identity
+#  2. Site Settings → Identity → Services → Enable Git Gateway
+#  3. Invite the salon owner via Identity → Invite Users
+# ─────────────────────────────────────────────────────────
+
+backend:
+  name: git-gateway
+  branch: main
+
+# Where uploaded photos are stored in the repo
+media_folder: "photos/uploads"
+# Public URL prefix used when saving image paths in JSON
+public_folder: "/photos/uploads"
+
+# ─────────────────────────────────────────────────────────
+# COLLECTIONS
+# ─────────────────────────────────────────────────────────
+collections:
+
+  # ── 1. ANNOUNCEMENT BAR ──────────────────────────────
+  - name: settings
+    label: "Announcement Bar"
+    format: json
+    files:
+      - name: announcement
+        label: "Announcement Text"
+        file: "data/settings/announcement.json"
+        description: >
+          The scrolling strip at the very top of the page.
+          Update both English and Chinese versions.
+        fields:
+          - label: "Text — English"
+            name: text_en
+            widget: string
+            hint: >
+              e.g. Walk-ins welcome · UBC AMS Nest · Open daily 10:30am – 6:30pm
+          - label: "Text — Chinese (中文)"
+            name: text_zh
+            widget: string
+            hint: >
+              e.g. 欢迎直接到店 · UBC AMS大楼 · 每日营业 10:30am – 6:30pm
+
+  # ── 2. HERO IMAGE ────────────────────────────────────
+  - name: hero
+    label: "Hero Image"
+    format: json
+    files:
+      - name: hero
+        label: "Hero Photo"
+        file: "data/hero.json"
+        description: >
+          The large photo on the right side of the homepage banner.
+          Recommended: landscape orientation, at least 1400 px wide.
+        fields:
+          - label: "Hero Image"
+            name: image
+            widget: image
+            hint: "JPG or PNG, landscape, min 1400 px wide for best quality"
+
+  # ── 3. GALLERY ───────────────────────────────────────
+  - name: gallery
+    label: "Gallery Photos"
+    format: json
+    files:
+      - name: gallery
+        label: "Gallery Carousel"
+        file: "data/gallery.json"
+        description: >
+          Photos displayed in the carousel on the homepage.
+          Drag rows to reorder. Click the + button to add more.
+        fields:
+          - label: "Photos"
+            name: photos
+            widget: list
+            allow_add: true
+            minimize_collapsed: true
+            label_singular: "Photo"
+            fields:
+              - label: "Photo"
+                name: image
+                widget: image
+              - label: "Alt Text (optional)"
+                name: alt
+                widget: string
+                required: false
+                hint: >
+                  A short description of the photo for screen readers.
+                  e.g. "Salon interior showing styling chairs"
+
+  # ── 4. SERVICES ──────────────────────────────────────
+  - name: services
+    label: "Services"
+    format: json
+    files:
+      - name: services
+        label: "Services List"
+        file: "data/services.json"
+        description: >
+          The six services shown on the homepage.
+          Update the name, short description, and photo for each.
+          The order here matches the order on the website (01–06).
+        fields:
+          - label: "Services"
+            name: services
+            widget: list
+            allow_add: false
+            collapsed: false
+            label_singular: "Service"
+            fields:
+              - label: "Service Name — English"
+                name: name_en
+                widget: string
+              - label: "Service Name — Chinese (中文)"
+                name: name_zh
+                widget: string
+              - label: "Short Description — English"
+                name: description_en
+                widget: string
+                hint: "One sentence shown below the service name in the list"
+              - label: "Short Description — Chinese (中文)"
+                name: description_zh
+                widget: string
+              - label: "Service Photo"
+                name: image
+                widget: image
+                hint: "Shown when the customer expands this service. Landscape preferred."

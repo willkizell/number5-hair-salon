@@ -1,0 +1,46 @@
+{
+  "services": [
+    {
+      "name_en": "Men's Haircut",
+      "name_zh": "男士剪发",
+      "description_en": "Scissor or clipper cut, includes shampoo and blow dry",
+      "description_zh": "剪刀或推剪，含洗发吹干",
+      "image": "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=700&q=80&auto=format&fit=crop"
+    },
+    {
+      "name_en": "Women's Haircut",
+      "name_zh": "女士剪发",
+      "description_en": "Precision cut tailored to your style, includes shampoo",
+      "description_zh": "精准剪发，含洗发",
+      "image": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=700&q=80&auto=format&fit=crop"
+    },
+    {
+      "name_en": "Shampoo & Conditioning",
+      "name_zh": "洗发护发",
+      "description_en": "Full wash, condition, and blow dry service",
+      "description_zh": "洗发、护发、吹干",
+      "image": "https://images.unsplash.com/photo-1560869713-7d0a29430803?w=700&q=80&auto=format&fit=crop"
+    },
+    {
+      "name_en": "Hair Colouring",
+      "name_zh": "染发",
+      "description_en": "Full colour, highlights, and touch-ups",
+      "description_zh": "全染、挑染及补色",
+      "image": "https://images.unsplash.com/photo-1562322140-8baeececf3df?w=700&q=80&auto=format&fit=crop"
+    },
+    {
+      "name_en": "Perms & Treatment",
+      "name_zh": "烫发与护理",
+      "description_en": "Curls, waves, straightening, and deep treatment",
+      "description_zh": "卷发、波浪、直发及深层护理",
+      "image": "https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=700&q=80&auto=format&fit=crop"
+    },
+    {
+      "name_en": "Styling",
+      "name_zh": "造型",
+      "description_en": "Blowout, flat iron, or special occasion styling",
+      "description_zh": "吹造型、直板夹或特殊场合造型",
+      "image": "https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=700&q=80&auto=format&fit=crop"
+    }
+  ]
+}

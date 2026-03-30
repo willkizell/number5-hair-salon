@@ -1,0 +1,11 @@
+{
+  "photos": [
+    { "image": "photos/Gallery_photos/Gallary_photo_1.jpg", "alt": "Number 5 Hair Salon — photo 1" },
+    { "image": "photos/Gallery_photos/Gallary_photo_2.jpg", "alt": "Number 5 Hair Salon — photo 2" },
+    { "image": "photos/Gallery_photos/Gallary_photo_3.jpg", "alt": "Number 5 Hair Salon — photo 3" },
+    { "image": "photos/Gallery_photos/Gallary_photo_4.jpg", "alt": "Number 5 Hair Salon — photo 4" },
+    { "image": "photos/Gallery_photos/Gallary_photo_5.jpg", "alt": "Number 5 Hair Salon — photo 5" },
+    { "image": "photos/Gallery_photos/Gallary_photo_6.jpg", "alt": "Number 5 Hair Salon — photo 6" },
+    { "image": "photos/Gallery_photos/Gallary_photo_7.jpg", "alt": "Number 5 Hair Salon — photo 7" }
+  ]
+}
