@@ -1189,10 +1189,10 @@
       margin-bottom: 6px;
     }
     .contact__info-value {
-      font-size: 14px;
+      font-size: 17px;
       font-weight: 300;
       color: var(--dark);
-      line-height: 1.7;
+      line-height: 1.8;
     }
 
     .contact__body {
@@ -1205,46 +1205,36 @@
     }
 
     /* Card */
-    .contact__card {
-      background: var(--off-white);
-      border-radius: 3px;
-      padding: clamp(28px, 4vw, 48px);
+    .contact__map-wrap {
       margin-top: 8px;
+      border-radius: 3px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid var(--border);
     }
-    .contact__card-title {
-      font-family: var(--ff-display);
-      font-size: 22px;
-      font-weight: 400;
-      color: var(--dark);
-      margin-bottom: 24px;
+    .contact__map-wrap iframe {
+      display: block;
+      width: 100%;
+      height: clamp(420px, 58vh, 640px);
+      border: 0;
+      filter: grayscale(30%) contrast(1.05);
     }
-    .contact__card-info {
-      font-size: 13px;
-      font-weight: 300;
-      color: #555;
-      line-height: 2;
-    }
-    .contact__card-info strong {
-      font-weight: 500;
-      color: var(--dark);
-    }
-    .contact__directions {
-      display: inline-flex;
+    .contact__map-link {
+      display: flex;
       align-items: center;
-      gap: 4px;
-      margin-top: 26px;
-      font-family: var(--ff-body);
+      justify-content: space-between;
+      padding: 14px 18px;
+      background: var(--off-white);
+      border-top: 1px solid var(--border);
       font-size: 10px;
       font-weight: 500;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--dark);
-      border-bottom: 1px solid var(--gold);
-      padding-bottom: 2px;
-      transition: color 0.2s ease;
+      transition: background 0.2s ease, color 0.2s ease;
     }
-    .contact__directions:link, .contact__directions:visited { color: var(--dark); }
-    .contact__directions:hover { color: var(--gold); }
+    .contact__map-link:link, .contact__map-link:visited { color: var(--dark); }
+    .contact__map-link:hover { background: var(--gold); color: var(--white); }
 
     /* ═══════════════════════════════════════
        CTA BANNER
@@ -2154,37 +2144,23 @@
         </div>
       </div>
 
-      <!-- Right card -->
-      <div class="contact__card reveal d2">
-        <p class="contact__card-title"
-           data-en="Visit Us" data-zh="前来造访">Visit Us</p>
-        <div class="contact__card-info">
-          <p><strong>Number 5 Hair Salon</strong></p>
-          <p>401-6133 University Boulevard</p>
-          <p>Vancouver BC &nbsp; V6T 1Z1</p>
-          <br>
-          <p>
-            <span data-en="Hours" data-zh="营业时间">Hours</span><br>
-            <span data-en="Mon–Fri, 10:00am – 6:30pm"
-                  data-zh="周一至五，10:00am – 6:30pm">Mon–Fri, 10:00am – 6:30pm</span><br>
-            <span data-en="Sat–Sun, 10:30am – 6:30pm"
-                  data-zh="周六至日，10:30am – 6:30pm">Sat–Sun, 10:30am – 6:30pm</span>
-          </p>
-          <br>
-          <p>
-            <span data-en="Phone" data-zh="电话">Phone</span><br>
-            <a href="tel:6045598998">604-559-8998</a>
-          </p>
-          <br>
-          <p data-en="Walk-ins welcome daily."
-             data-zh="每日欢迎直接到访。">Walk-ins welcome daily.</p>
-
-        </div>
-        <a href="https://www.google.com/maps/place/6133+University+Blvd,+Vancouver,+BC+V6T+1Z1/@49.2658618,-123.2492087,3a,75y,330.58h,90t/data=!3m4!1e1!3m2!1sQYRJg4iYZb49x1P-jKNZkw!2e0!4m2!3m1!1s0x548672b7acae9ced:0x3030c2012e5cb3fd"
+      <!-- Right: map -->
+      <div class="contact__map-wrap reveal d2">
+        <iframe
+          src="https://maps.google.com/maps?q=49.2668649,-123.2499731&z=17&output=embed"
+          title="Number 5 Hair Salon location"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+        <a href="https://www.google.com/maps/place/Number+5+Hair+Salon(UBC-Hair+Salon%EF%BC%89/@49.2668649,-123.252548,17z"
            target="_blank" rel="noopener noreferrer"
-           class="contact__directions"
+           class="contact__map-link"
            data-en="Get Directions →"
-           data-zh="获取路线 →">Get Directions →</a>
+           data-zh="获取路线 →">
+          <span>Get Directions →</span>
+          <span style="opacity:0.4; font-size:9px; letter-spacing:0.1em">GOOGLE MAPS</span>
+        </a>
       </div>
 
     </div>
