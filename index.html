@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Number 5 Hair Salon · UBC AMS Nest · Vancouver</title>
-  <meta name="description" content="Professional hair salon at UBC AMS Nest, 401-6133 University Boulevard. Walk-ins welcome. Open daily 10:30am–6:30pm. Call 604-559-8998. 欢迎光临Number 5美发沙龙。">
+  <meta name="description" content="Professional hair salon at UBC AMS Nest, 401-6133 University Boulevard. Walk-ins welcome. Mon–Fri 10:00am–6:30pm · Sat–Sun 10:30am–6:30pm. Call 604-559-8998. 欢迎光临Number 5美发沙龙。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Dancing+Script:wght@400;600&family=Inter:wght@300;400;500&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
 
   <!-- Netlify Identity — handles /admin/ login redirect from confirmation emails -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
@@ -21,14 +21,14 @@
       --off-white:   #F7F7F7;
       --dark:        #1A1A1A;
       --dark-card:   #242424;
-      --gold:        #C9A96E;
-      --gold-soft:   rgba(201,169,110,0.12);
+      --gold:        #BD9B8B;
+      --gold-soft:   rgba(189,155,139,0.12);
       --muted:       #888888;
       --border:      #EEEEEE;
       --border-nav:  #F0F0F0;
 
-      --ff-display:  'Cormorant Garamond', Georgia, serif;
-      --ff-body:     'Inter', system-ui, sans-serif;
+      --ff-display:  Optima, 'Optima Nova LT', Candara, 'Gill Sans', 'Century Gothic', AppleGothic, sans-serif;
+      --ff-body:     Optima, 'Optima Nova LT', Candara, 'Gill Sans', 'Century Gothic', AppleGothic, sans-serif;
       --ff-zh:       'Noto Sans SC', sans-serif;
       --ff-logo:     'Dancing Script', cursive;
 
@@ -64,7 +64,6 @@
     body.lang-zh { font-family: var(--ff-zh), var(--ff-body); }
     body.lang-zh .hero__h1,
     body.lang-zh .section__heading,
-    body.lang-zh .svc-name,
     body.lang-zh .cta-banner__heading,
     body.lang-zh .contact__phone,
     body.lang-zh .review-card__quote,
@@ -73,7 +72,6 @@
     body.lang-zh .hero__sub,
     body.lang-zh .section__sub,
     body.lang-zh .about__body p,
-    body.lang-zh .svc-desc,
     body.lang-zh .contact__body,
     body.lang-zh .contact__info-value,
     body.lang-zh .contact__card-info { font-size: 15px; letter-spacing: 0.01em; }
@@ -511,7 +509,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(160deg, rgba(201,169,110,0.06) 0%, transparent 55%);
+      background: linear-gradient(160deg, rgba(189,155,139,0.06) 0%, transparent 55%);
       pointer-events: none;
     }
     .hero__visual-label {
@@ -583,7 +581,7 @@
     .nest-band__icon {
       flex-shrink: 0;
       width: 48px; height: 48px;
-      border: 1px solid rgba(201,169,110,0.35);
+      border: 1px solid rgba(189,155,139,0.35);
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -652,7 +650,7 @@
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--gold);
-      border-bottom: 1px solid rgba(201,169,110,0.35);
+      border-bottom: 1px solid rgba(189,155,139,0.35);
       padding-bottom: 2px;
       transition: border-color 0.2s ease, opacity 0.2s ease;
       white-space: nowrap;
@@ -666,35 +664,86 @@
     }
 
     /* ═══════════════════════════════════════
-       SERVICES — editorial dark list + expand
+       SERVICES — split layout with accordion
     ═══════════════════════════════════════ */
     .services {
-      background: var(--dark);
+      background: var(--white);
+      padding: 0;              /* override .section padding */
       position: relative;
     }
-    .services::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1px;
-      background: rgba(255,255,255,0.06);
-    }
-    .services .eyebrow { color: rgba(201,169,110,0.65); }
-    .services .heading { color: var(--white); }
-    .services .subtext { color: rgba(255,255,255,0.4); margin-bottom: 0; }
 
-    .svc-list {
-      list-style: none;
-      margin-top: 56px;
-      border-top: 1px solid rgba(255,255,255,0.07);
+    /* Two-column split: accordion left, photo right */
+    .services__split {
+      display: grid;
+      grid-template-columns: 1fr 40%;
+      align-items: start;
     }
 
-    /* Row wrapper */
-    .svc-row {
-      border-bottom: 1px solid rgba(255,255,255,0.07);
+    .services__content {
+      padding: clamp(72px, 9vw, 120px) clamp(20px, 5vw, 64px) clamp(72px, 9vw, 120px) clamp(20px, 7vw, 96px);
+    }
+
+    .services__photo-col {
+      position: sticky;
+      top: var(--header-h);
+      height: calc(100vh - var(--header-h));
+      overflow: hidden;
+    }
+    .services__photo-col img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Section text */
+    .services .eyebrow { color: var(--gold); }
+    .services .heading { color: var(--dark); }
+    .services .subtext { color: var(--muted); margin-bottom: 0; }
+
+    /* ── Accordion wrapper ── */
+    .svc-accordion { margin-top: 44px; }
+
+    /* ── Group header (Men's / Lady) ── */
+    .svc-group { margin-top: 40px; }
+    .svc-group:first-child { margin-top: 0; }
+    .svc-group__hd {
+      padding: 0 0 14px;
+    }
+    .svc-group__label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--dark);
+      white-space: nowrap;
+    }
+
+    /* Column headers for Lady (Short / Long) */
+    .svc-cols {
+      display: grid;
+      grid-template-columns: 1fr 60px 72px 28px;
+      gap: 0 8px;
+      padding: 6px 0 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .svc-col-lbl {
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    /* ── Service list ── */
+    .svc-list { list-style: none; }
+
+    .svc-item {
+      border-bottom: 1px solid var(--border);
       position: relative;
     }
-    .svc-row::before {
+    /* Accent left bar on hover/open */
+    .svc-item::before {
       content: '';
       position: absolute;
       left: 0; top: 0; bottom: 0;
@@ -702,208 +751,163 @@
       background: var(--gold);
       transform: scaleY(0);
       transform-origin: center;
-      transition: transform 0.4s var(--ease-spring);
+      transition: transform 0.35s var(--ease-spring);
       pointer-events: none;
-      z-index: 1;
     }
-    .svc-row:hover::before,
-    .svc-row.open::before { transform: scaleY(1); }
+    .svc-item:hover::before,
+    .svc-item.open::before { transform: scaleY(1); }
 
-    /* Clickable header */
-    .svc-row__header {
+    /* Clickable row */
+    .svc-row {
       display: grid;
-      grid-template-columns: 76px 1fr 1.6fr auto;
-      gap: 0 clamp(24px, 3.5vw, 56px);
       align-items: center;
-      padding: clamp(24px, 3.2vw, 40px) 0;
-      padding-left: 20px;
+      gap: 0 10px;
+      padding: 15px 0 15px 10px;
       cursor: pointer;
-      transition: padding-left 0.35s var(--ease-spring);
       -webkit-tap-highlight-color: transparent;
       user-select: none;
+      transition: padding-left 0.25s var(--ease-smooth);
     }
-    .svc-row:hover .svc-row__header,
-    .svc-row.open .svc-row__header { padding-left: 28px; }
-    .svc-row:hover .svc-num,
-    .svc-row.open .svc-num { color: var(--gold); }
+    .svc-group--men .svc-row  { grid-template-columns: 1fr 80px 28px; }
+    .svc-group--lady .svc-row { grid-template-columns: 1fr 60px 72px 28px; }
 
-    /* Ghost number */
-    .svc-num {
-      font-family: var(--ff-display);
-      font-size: clamp(40px, 4vw, 60px);
-      font-weight: 300;
-      color: rgba(255,255,255,0.07);
-      line-height: 1;
-      letter-spacing: -0.03em;
-      transition: color 0.35s ease;
-      user-select: none;
+    .svc-item:hover .svc-row,
+    .svc-item.open  .svc-row  { padding-left: 16px; }
+
+    /* Bilingual name block */
+    .svc-row__name {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
     }
+    body.lang-zh .svc-row__name { flex-direction: column-reverse; }
 
-    .svc-name {
-      font-family: var(--ff-display);
-      font-size: clamp(22px, 2.2vw, 30px);
+    .svc-row__en {
+      font-size: 14px;
       font-weight: 400;
-      color: rgba(255,255,255,0.9);
-      letter-spacing: -0.01em;
-      line-height: 1.15;
+      color: var(--dark);
+      line-height: 1.2;
+      transition: color 0.2s ease;
     }
-
-    .svc-desc {
-      font-family: var(--ff-body);
-      font-size: 13px;
+    .svc-row__zh {
+      font-size: 11px;
       font-weight: 300;
-      color: rgba(255,255,255,0.35);
-      line-height: 1.75;
+      color: var(--muted);
+      margin-top: 3px;
+      line-height: 1;
+      transition: color 0.2s ease;
     }
+    /* In Chinese mode sizes swap */
+    body.lang-zh .svc-row__en { font-size: 11px; font-weight: 300; color: var(--muted); margin-top: 3px; }
+    body.lang-zh .svc-row__zh { font-size: 14px; font-weight: 400; color: var(--dark);  margin-top: 0; }
 
-    /* Chevron arrow */
-    .svc-arrow {
-      width: 34px; height: 34px; min-width: 34px;
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 50%;
-      background: none;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; padding: 0;
-      transition: transform 0.45s var(--ease-spring), border-color 0.3s ease, background 0.3s ease;
-      flex-shrink: 0;
+    /* Highlight primary name on hover/open */
+    .svc-item:hover .svc-row__en,
+    .svc-item.open  .svc-row__en { color: var(--gold); }
+    body.lang-zh .svc-item:hover .svc-row__en,
+    body.lang-zh .svc-item.open  .svc-row__en { color: var(--muted); }
+    body.lang-zh .svc-item:hover .svc-row__zh,
+    body.lang-zh .svc-item.open  .svc-row__zh { color: var(--gold); }
+
+    /* Price */
+    .svc-price {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--dark);
+      text-align: right;
+      white-space: nowrap;
+      line-height: 1;
     }
-    .svc-arrow svg {
-      width: 13px; height: 13px;
-      stroke: rgba(255,255,255,0.38);
-      fill: none; stroke-width: 1.8;
+    .svc-price.muted { color: var(--muted); font-size: 13px; font-weight: 400; }
+
+    /* Chevron */
+    .svc-chevron {
+      width: 15px; height: 15px;
+      stroke: rgba(0,0,0,0.25);
+      fill: none; stroke-width: 2;
       stroke-linecap: round; stroke-linejoin: round;
-      transition: stroke 0.3s ease;
+      transition: transform 0.4s var(--ease-spring), stroke 0.25s ease;
+      justify-self: center;
     }
-    .svc-row.open .svc-arrow {
+    .svc-item.open .svc-chevron {
       transform: rotate(180deg);
-      border-color: rgba(201,169,110,0.5);
-      background: rgba(201,169,110,0.09);
+      stroke: var(--gold);
     }
-    .svc-row.open .svc-arrow svg { stroke: var(--gold); }
 
-    /* Expand panel — grid-row trick for smooth height */
+    /* Expand panel — grid-row trick */
     .svc-expand {
       display: grid;
       grid-template-rows: 0fr;
-      transition: grid-template-rows 0.55s var(--ease-spring);
+      transition: grid-template-rows 0.48s var(--ease-spring);
     }
-    .svc-row.open .svc-expand { grid-template-rows: 1fr; }
+    .svc-item.open .svc-expand { grid-template-rows: 1fr; }
+    .svc-expand__inner { overflow: hidden; min-height: 0; }
 
-    .svc-expand__inner {
-      overflow: hidden;
-      min-height: 0;
+    .svc-expand__body {
+      padding: 4px 0 22px 10px;
     }
-
-    .svc-expand__content {
-      display: grid;
-      grid-template-columns: 260px 1fr;
-      gap: clamp(24px, 3vw, 48px);
-      padding: 4px 20px 44px;
-      align-items: start;
-    }
-
-    .svc-expand__visual {
-      aspect-ratio: 4/3;
-      border-radius: 6px;
-      overflow: hidden;
-      background: linear-gradient(135deg, #2c2c2c 0%, #1c1c1c 100%);
-      flex-shrink: 0;
-    }
-    .svc-expand__visual img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.6s var(--ease-smooth);
-    }
-    .svc-row.open .svc-expand__visual img { transform: scale(1.02); }
-
-    /* Sub-items list */
-    .svc-subitems {
-      list-style: none;
-      margin-bottom: 22px;
-    }
-    .svc-subitem {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 9px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      font-family: var(--ff-body);
+    .svc-expand__desc {
       font-size: 13px;
       font-weight: 300;
-      color: rgba(255,255,255,0.58);
-      line-height: 1.3;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 460px;
+      margin-bottom: 14px;
     }
-    .svc-subitem::before {
-      content: '';
-      width: 4px; height: 4px;
-      border-radius: 50%;
-      background: var(--gold);
-      flex-shrink: 0;
-      opacity: 0.65;
-    }
-
-    .svc-expand__note {
-      font-size: 12px;
-      font-style: italic;
-      color: rgba(255,255,255,0.26);
-      line-height: 1.8;
-      margin-bottom: 26px;
-      font-family: var(--ff-body);
-    }
-
-    /* Book button inside expand */
-    .btn-svc-book {
+    .btn-book-svc {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      gap: 6px;
-      background: var(--gold);
-      color: var(--white);
-      font-family: var(--ff-body);
-      font-size: 10px;
+      gap: 7px;
+      font-size: 9px;
       font-weight: 500;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      padding: 13px 28px;
-      border-radius: 8px;
-      transition: filter 0.25s ease, transform 0.25s ease;
-      white-space: nowrap;
+      color: var(--white);
+      background: var(--dark);
+      padding: 10px 20px;
+      border-radius: 3px;
+      transition: background 0.2s ease, transform 0.2s ease;
     }
-    .btn-svc-book:link, .btn-svc-book:visited { color: var(--white); }
-    .btn-svc-book:hover { filter: brightness(1.1); transform: translateY(-2px); }
+    .btn-book-svc:link, .btn-book-svc:visited { color: var(--white); }
+    .btn-book-svc:hover { background: var(--gold); transform: translateY(-1px); }
 
-    @media (max-width: 768px) {
-      .svc-row__header {
-        grid-template-columns: 48px 1fr auto;
-        gap: 0 14px;
-        padding-left: 16px;
-        padding-top: clamp(20px, 4vw, 28px);
-        padding-bottom: clamp(20px, 4vw, 28px);
-      }
-      .svc-row:hover .svc-row__header,
-      .svc-row.open .svc-row__header { padding-left: 22px; }
-      .svc-num { font-size: 32px; align-self: center; }
-      .svc-name { font-size: 20px; }
-      .svc-desc { display: none; } /* shown in expand instead */
+    /* Column header bilingual */
+    .th-en { display: inline; }
+    .th-zh { display: none; }
+    body.lang-zh .th-en { display: none; }
+    body.lang-zh .th-zh { display: inline; }
 
-      .svc-expand__content {
-        grid-template-columns: 1fr;
-        padding: 0 12px 32px;
-        gap: 20px;
+    /* Price disclaimer note */
+    .price-note {
+      margin-top: 28px;
+      font-size: 10px;
+      color: var(--muted);
+      opacity: 0.65;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 900px) {
+      .services__split { grid-template-columns: 1fr; }
+      .services__photo-col { display: none; }
+      .services__content {
+        padding: clamp(60px, 8vw, 80px) clamp(20px, 6vw, 40px);
       }
-      .svc-expand__visual { aspect-ratio: 16/9; }
-      .btn-svc-book { width: 100%; justify-content: center; padding: 14px; }
+      .svc-group--lady .svc-row,
+      .svc-cols { grid-template-columns: 1fr 58px 66px 24px; }
     }
 
     /* ═══════════════════════════════════════
        GALLERY
     ═══════════════════════════════════════ */
     .gallery {
-      background: var(--white);
-      padding-bottom: 0;
+      background: var(--dark);
+      padding-bottom: clamp(48px, 6vw, 80px);
     }
-    .gallery .container { margin-bottom: clamp(40px, 5vw, 64px); }
+    .gallery .eyebrow { color: var(--gold); }
+    .gallery .heading  { color: var(--white); }
+    .gallery .subtext  { color: rgba(255,255,255,0.42); margin-bottom: 0; }
+    .gallery .container { padding-bottom: clamp(48px, 7vw, 80px); }
 
     /* Carousel wrapper — full bleed */
     .carousel {
@@ -913,22 +917,20 @@
       background: #0D0D0D;
       user-select: none;
     }
-
     .carousel__track {
       display: flex;
       will-change: transform;
       transition: transform 0.72s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
-
     .carousel__slide {
       min-width: 100%;
       position: relative;
-      height: clamp(220px, 36vh, 420px);
-      background: #141414;
+      height: clamp(300px, 56vh, 640px);
+      background: #0D0D0D;
       overflow: hidden;
     }
     @media (max-width: 600px) {
-      .carousel__slide { height: clamp(180px, 52vw, 280px); }
+      .carousel__slide { height: clamp(240px, 68vw, 420px); }
     }
     .carousel__slide img {
       width: 100%; height: 100%;
@@ -976,8 +978,8 @@
     .carousel__next { right: 20px; }
     .carousel__prev:hover,
     .carousel__next:hover {
-      background: rgba(201,169,110,0.25);
-      border-color: rgba(201,169,110,0.6);
+      background: rgba(189,155,139,0.25);
+      border-color: rgba(189,155,139,0.6);
       transform: translateY(-50%) scale(1.06);
     }
     .carousel__prev svg,
@@ -1108,11 +1110,11 @@
       left: 50%;
       transform: translateX(-50%);
       width: 700px; height: 500px;
-      background: radial-gradient(ellipse at center, rgba(201,169,110,0.07) 0%, transparent 70%);
+      background: radial-gradient(ellipse at center, rgba(189,155,139,0.07) 0%, transparent 70%);
       pointer-events: none;
     }
     .reviews .heading { color: var(--white); }
-    .reviews .eyebrow { color: rgba(201,169,110,0.7); }
+    .reviews .eyebrow { color: rgba(189,155,139,0.7); }
 
     .reviews__grid {
       display: grid;
@@ -1187,10 +1189,10 @@
       margin-bottom: 6px;
     }
     .contact__info-value {
-      font-size: 14px;
+      font-size: 17px;
       font-weight: 300;
       color: var(--dark);
-      line-height: 1.7;
+      line-height: 1.8;
     }
 
     .contact__body {
@@ -1203,46 +1205,36 @@
     }
 
     /* Card */
-    .contact__card {
-      background: var(--off-white);
-      border-radius: 3px;
-      padding: clamp(28px, 4vw, 48px);
+    .contact__map-wrap {
       margin-top: 8px;
+      border-radius: 3px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid var(--border);
     }
-    .contact__card-title {
-      font-family: var(--ff-display);
-      font-size: 22px;
-      font-weight: 400;
-      color: var(--dark);
-      margin-bottom: 24px;
+    .contact__map-wrap iframe {
+      display: block;
+      width: 100%;
+      height: clamp(420px, 58vh, 640px);
+      border: 0;
+      filter: grayscale(30%) contrast(1.05);
     }
-    .contact__card-info {
-      font-size: 13px;
-      font-weight: 300;
-      color: #555;
-      line-height: 2;
-    }
-    .contact__card-info strong {
-      font-weight: 500;
-      color: var(--dark);
-    }
-    .contact__directions {
-      display: inline-flex;
+    .contact__map-link {
+      display: flex;
       align-items: center;
-      gap: 4px;
-      margin-top: 26px;
-      font-family: var(--ff-body);
+      justify-content: space-between;
+      padding: 14px 18px;
+      background: var(--off-white);
+      border-top: 1px solid var(--border);
       font-size: 10px;
       font-weight: 500;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--dark);
-      border-bottom: 1px solid var(--gold);
-      padding-bottom: 2px;
-      transition: color 0.2s ease;
+      transition: background 0.2s ease, color 0.2s ease;
     }
-    .contact__directions:link, .contact__directions:visited { color: var(--dark); }
-    .contact__directions:hover { color: var(--gold); }
+    .contact__map-link:link, .contact__map-link:visited { color: var(--dark); }
+    .contact__map-link:hover { background: var(--gold); color: var(--white); }
 
     /* ═══════════════════════════════════════
        CTA BANNER
@@ -1474,9 +1466,9 @@
   <!-- 1. ANNOUNCEMENT BAR -->
   <div class="topbar" id="topbar">
     <p class="topbar__text"
-       data-en="Walk-ins welcome · UBC AMS Nest · Open daily 10:30am – 6:30pm"
-       data-zh="欢迎直接到店 · UBC AMS大楼 · 每日营业 10:30am – 6:30pm">
-      Walk-ins welcome · UBC AMS Nest · Open daily 10:30am – 6:30pm
+       data-en="Walk-ins welcome · Mon–Fri 10am–6:30pm · Sat–Sun 10:30am–6:30pm"
+       data-zh="欢迎直接到店 · 周一至五 10:00am–6:30pm · 周六日 10:30am–6:30pm">
+      Walk-ins welcome · Mon–Fri 10am–6:30pm · Sat–Sun 10:30am–6:30pm
     </p>
   </div>
 
@@ -1639,280 +1631,299 @@
      4. SERVICES
 ═══════════════════════════════════════ -->
 <section class="section services" id="services" aria-labelledby="services-heading">
-  <div class="container">
-    <p class="eyebrow reveal"
-       data-en="What We Do" data-zh="服务项目">What We Do</p>
-    <h2 class="heading reveal d1" id="services-heading"
-        data-en="What We Do." data-zh="我们的服务。">What We Do.</h2>
-    <p class="subtext reveal d2"
-       data-en="Quality cuts and styling at prices that work for students and staff alike."
-       data-zh="专业剪发与造型，价格实惠，适合学生与教职员。">
-      Quality cuts and styling at prices that work for students and staff alike.
-    </p>
+  <div class="services__split">
 
-    <ol class="svc-list" aria-label="Services">
+    <!-- ── Left: accordion content ── -->
+    <div class="services__content">
+      <p class="eyebrow reveal"
+         data-en="What We Do" data-zh="服务项目">What We Do</p>
+      <h2 class="heading reveal d1" id="services-heading"
+          data-en="What We Do." data-zh="我们的服务。">What We Do.</h2>
+      <p class="subtext reveal d2"
+         data-en="Quality cuts and styling at prices that work for students and staff alike."
+         data-zh="专业剪发与造型，价格实惠，适合学生与教职员。">
+        Quality cuts and styling at prices that work for students and staff alike.
+      </p>
 
-      <!-- 01 Men's Haircut -->
-      <li class="svc-row reveal d1">
-        <div class="svc-row__header" role="button" tabindex="0" aria-expanded="false"
-             aria-controls="svc-expand-01"
-             data-en-label="Men's Haircut" data-zh-label="男士剪发">
-          <span class="svc-num" aria-hidden="true">01</span>
-          <div class="svc-name" data-en="Men's Haircut" data-zh="男士剪发">Men's Haircut</div>
-          <p class="svc-desc"
-             data-en="Scissor or clipper cut, includes shampoo and blow dry"
-             data-zh="剪刀或推剪，含洗发吹干">Scissor or clipper cut, includes shampoo and blow dry</p>
-          <button class="svc-arrow" aria-label="Expand" tabindex="-1">
-            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-        </div>
-        <div class="svc-expand" id="svc-expand-01">
-          <div class="svc-expand__inner">
-            <div class="svc-expand__content">
-              <div class="svc-expand__visual">
-                <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=700&q=80&auto=format&fit=crop"
-                     alt="Men's haircut"
-                     onerror="this.style.display='none'">
-              </div>
-              <div class="svc-expand__body">
-                <ul class="svc-subitems">
-                  <li class="svc-subitem" data-en="Classic scissor cut" data-zh="经典剪刀剪">Classic scissor cut</li>
-                  <li class="svc-subitem" data-en="Taper &amp; fade" data-zh="渐变 &amp; 推剪">Taper &amp; fade</li>
-                  <li class="svc-subitem" data-en="Clipper cut" data-zh="电推剪">Clipper cut</li>
-                  <li class="svc-subitem" data-en="Kids cut" data-zh="儿童剪发">Kids cut</li>
-                </ul>
-                <p class="svc-expand__note"
-                   data-en="Includes shampoo and blow dry. Bring a reference photo for best results."
-                   data-zh="含洗发吹干。建议携带参考发型照片。">
-                  Includes shampoo and blow dry. Bring a reference photo for best results.
-                </p>
-                <a href="tel:6045598998" class="btn-svc-book">
-                  <span data-en="Call to Book" data-zh="致电预约">Call to Book</span>
-                  <span aria-hidden="true">→</span>
-                </a>
-              </div>
-            </div>
+      <div class="svc-accordion reveal d2">
+
+        <!-- ── MEN'S SERVICES ── -->
+        <div class="svc-group svc-group--men">
+          <div class="svc-group__hd">
+            <span class="svc-group__label"
+                  data-en="Men's Services" data-zh="男士服务">Men's Services</span>
           </div>
-        </div>
-      </li>
 
-      <!-- 02 Women's Haircut -->
-      <li class="svc-row reveal d2">
-        <div class="svc-row__header" role="button" tabindex="0" aria-expanded="false"
-             aria-controls="svc-expand-02">
-          <span class="svc-num" aria-hidden="true">02</span>
-          <div class="svc-name" data-en="Women's Haircut" data-zh="女士剪发">Women's Haircut</div>
-          <p class="svc-desc"
-             data-en="Precision cut tailored to your style, includes shampoo"
-             data-zh="精准剪发，含洗发">Precision cut tailored to your style, includes shampoo</p>
-          <button class="svc-arrow" aria-label="Expand" tabindex="-1">
-            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-        </div>
-        <div class="svc-expand" id="svc-expand-02">
-          <div class="svc-expand__inner">
-            <div class="svc-expand__content">
-              <div class="svc-expand__visual">
-                <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=700&q=80&auto=format&fit=crop"
-                     alt="Women's haircut"
-                     onerror="this.style.display='none'">
+          <ol class="svc-list" role="list">
+
+            <li class="svc-item">
+              <div class="svc-row" role="button" tabindex="0" aria-expanded="false">
+                <div class="svc-row__name">
+                  <span class="svc-row__en">Hair Cut only</span>
+                  <span class="svc-row__zh">单剪</span>
+                </div>
+                <span class="svc-price">$22 up</span>
+                <svg class="svc-chevron" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
               </div>
-              <div class="svc-expand__body">
-                <ul class="svc-subitems">
-                  <li class="svc-subitem" data-en="Precision trim" data-zh="精准修剪">Precision trim</li>
-                  <li class="svc-subitem" data-en="Layered cut" data-zh="层次感剪发">Layered cut</li>
-                  <li class="svc-subitem" data-en="Bob &amp; lob" data-zh="波波头 &amp; 长波波头">Bob &amp; lob</li>
-                  <li class="svc-subitem" data-en="Fringe &amp; bangs" data-zh="刘海修剪">Fringe &amp; bangs</li>
-                </ul>
-                <p class="svc-expand__note"
-                   data-en="Includes shampoo. Our stylists speak Mandarin and English — show us a photo."
-                   data-zh="含洗发。我们的发型师会说普通话和英语，欢迎带照片来。">
-                  Includes shampoo. Our stylists speak Mandarin and English — show us a photo.
+              <div class="svc-expand"><div class="svc-expand__inner"><div class="svc-expand__body">
+                <p class="svc-expand__desc"
+                   data-en="Dry cut with scissors or clippers, shaped and finished to your style."
+                   data-zh="使用剪刀或推剪修剪，按您喜欢的发型塑形修整。">
+                  Dry cut with scissors or clippers, shaped and finished to your style.
                 </p>
-                <a href="tel:6045598998" class="btn-svc-book">
-                  <span data-en="Call to Book" data-zh="致电预约">Call to Book</span>
-                  <span aria-hidden="true">→</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </li>
+                <a href="tel:6045598998" class="btn-book-svc"
+                   data-en="Book Now" data-zh="立即预约">Book Now</a>
+              </div></div></div>
+            </li>
 
-      <!-- 03 Shampoo & Conditioning -->
-      <li class="svc-row reveal d3">
-        <div class="svc-row__header" role="button" tabindex="0" aria-expanded="false"
-             aria-controls="svc-expand-03">
-          <span class="svc-num" aria-hidden="true">03</span>
-          <div class="svc-name" data-en="Shampoo &amp; Conditioning" data-zh="洗发护发">Shampoo &amp; Conditioning</div>
-          <p class="svc-desc"
-             data-en="Full wash, condition, and blow dry service"
-             data-zh="洗发、护发、吹干">Full wash, condition, and blow dry service</p>
-          <button class="svc-arrow" aria-label="Expand" tabindex="-1">
-            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-        </div>
-        <div class="svc-expand" id="svc-expand-03">
-          <div class="svc-expand__inner">
-            <div class="svc-expand__content">
-              <div class="svc-expand__visual">
-                <img src="https://images.unsplash.com/photo-1560869713-7d0a29430803?w=700&q=80&auto=format&fit=crop"
-                     alt="Hair wash and conditioning"
-                     onerror="this.style.display='none'">
+            <li class="svc-item">
+              <div class="svc-row" role="button" tabindex="0" aria-expanded="false">
+                <div class="svc-row__name">
+                  <span class="svc-row__en">Shampoo Cut</span>
+                  <span class="svc-row__zh">洗剪</span>
+                </div>
+                <span class="svc-price">$33 up</span>
+                <svg class="svc-chevron" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
               </div>
-              <div class="svc-expand__body">
-                <ul class="svc-subitems">
-                  <li class="svc-subitem" data-en="Express wash &amp; blow dry" data-zh="快速洗发吹干">Express wash &amp; blow dry</li>
-                  <li class="svc-subitem" data-en="Deep conditioning treatment" data-zh="深层护发护理">Deep conditioning treatment</li>
-                  <li class="svc-subitem" data-en="Scalp massage &amp; treatment" data-zh="头皮按摩护理">Scalp massage &amp; treatment</li>
-                  <li class="svc-subitem" data-en="Available as add-on to any cut" data-zh="可作为剪发附加项目">Available as add-on to any cut</li>
-                </ul>
-                <p class="svc-expand__note"
-                   data-en="Perfect standalone refresh or added to your haircut service."
-                   data-zh="可作为单独护理，也可搭配剪发服务。">
-                  Perfect standalone refresh or added to your haircut service.
+              <div class="svc-expand"><div class="svc-expand__inner"><div class="svc-expand__body">
+                <p class="svc-expand__desc"
+                   data-en="Relaxing shampoo followed by a precision cut and blow dry."
+                   data-zh="舒适洗发后，进行精准剪发并吹干定型。">
+                  Relaxing shampoo followed by a precision cut and blow dry.
                 </p>
-                <a href="tel:6045598998" class="btn-svc-book">
-                  <span data-en="Call to Book" data-zh="致电预约">Call to Book</span>
-                  <span aria-hidden="true">→</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </li>
+                <a href="tel:6045598998" class="btn-book-svc"
+                   data-en="Book Now" data-zh="立即预约">Book Now</a>
+              </div></div></div>
+            </li>
 
-      <!-- 04 Hair Colouring -->
-      <li class="svc-row reveal d4">
-        <div class="svc-row__header" role="button" tabindex="0" aria-expanded="false"
-             aria-controls="svc-expand-04">
-          <span class="svc-num" aria-hidden="true">04</span>
-          <div class="svc-name" data-en="Hair Colouring" data-zh="染发">Hair Colouring</div>
-          <p class="svc-desc"
-             data-en="Full colour, highlights, and touch-ups"
-             data-zh="全染、挑染及补色">Full colour, highlights, and touch-ups</p>
-          <button class="svc-arrow" aria-label="Expand" tabindex="-1">
-            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-        </div>
-        <div class="svc-expand" id="svc-expand-04">
-          <div class="svc-expand__inner">
-            <div class="svc-expand__content">
-              <div class="svc-expand__visual">
-                <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=700&q=80&auto=format&fit=crop"
-                     alt="Hair colouring"
-                     onerror="this.style.display='none'">
+            <li class="svc-item">
+              <div class="svc-row" role="button" tabindex="0" aria-expanded="false">
+                <div class="svc-row__name">
+                  <span class="svc-row__en">Perm</span>
+                  <span class="svc-row__zh">烫发</span>
+                </div>
+                <span class="svc-price">$88 up</span>
+                <svg class="svc-chevron" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
               </div>
-              <div class="svc-expand__body">
-                <ul class="svc-subitems">
-                  <li class="svc-subitem" data-en="Full colour" data-zh="全头染发">Full colour</li>
-                  <li class="svc-subitem" data-en="Highlights &amp; balayage" data-zh="挑染 &amp; 渐变染">Highlights &amp; balayage</li>
-                  <li class="svc-subitem" data-en="Root touch-up" data-zh="发根补色">Root touch-up</li>
-                  <li class="svc-subitem" data-en="Toner &amp; gloss" data-zh="护色调色">Toner &amp; gloss</li>
-                </ul>
-                <p class="svc-expand__note"
-                   data-en="Pricing varies by hair length and technique. Consultation included."
-                   data-zh="价格因发长和染发技术不同而有所差异，含咨询服务。">
-                  Pricing varies by hair length and technique. Consultation included.
+              <div class="svc-expand"><div class="svc-expand__inner"><div class="svc-expand__body">
+                <p class="svc-expand__desc"
+                   data-en="Waves, curls, or textured styles to suit your look and lifestyle."
+                   data-zh="波浪、卷发或纹理造型，打造符合您风格与生活方式的发型。">
+                  Waves, curls, or textured styles to suit your look and lifestyle.
                 </p>
-                <a href="tel:6045598998" class="btn-svc-book">
-                  <span data-en="Call to Book" data-zh="致电预约">Call to Book</span>
-                  <span aria-hidden="true">→</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </li>
+                <a href="tel:6045598998" class="btn-book-svc"
+                   data-en="Book Now" data-zh="立即预约">Book Now</a>
+              </div></div></div>
+            </li>
 
-      <!-- 05 Perms & Treatment -->
-      <li class="svc-row reveal d5">
-        <div class="svc-row__header" role="button" tabindex="0" aria-expanded="false"
-             aria-controls="svc-expand-05">
-          <span class="svc-num" aria-hidden="true">05</span>
-          <div class="svc-name" data-en="Perms &amp; Treatment" data-zh="烫发与护理">Perms &amp; Treatment</div>
-          <p class="svc-desc"
-             data-en="Curls, waves, straightening, and deep treatment"
-             data-zh="卷发、波浪、直发及深层护理">Curls, waves, straightening, and deep treatment</p>
-          <button class="svc-arrow" aria-label="Expand" tabindex="-1">
-            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-        </div>
-        <div class="svc-expand" id="svc-expand-05">
-          <div class="svc-expand__inner">
-            <div class="svc-expand__content">
-              <div class="svc-expand__visual">
-                <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=700&q=80&auto=format&fit=crop"
-                     alt="Perms and hair treatment"
-                     onerror="this.style.display='none'">
+            <li class="svc-item">
+              <div class="svc-row" role="button" tabindex="0" aria-expanded="false">
+                <div class="svc-row__name">
+                  <span class="svc-row__en">Color</span>
+                  <span class="svc-row__zh">染色</span>
+                </div>
+                <span class="svc-price">$88 up</span>
+                <svg class="svc-chevron" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
               </div>
-              <div class="svc-expand__body">
-                <ul class="svc-subitems">
-                  <li class="svc-subitem" data-en="Digital perm" data-zh="数码烫">Digital perm</li>
-                  <li class="svc-subitem" data-en="Cold perm &amp; wave" data-zh="冷烫 &amp; 波浪烫">Cold perm &amp; wave</li>
-                  <li class="svc-subitem" data-en="Keratin straightening" data-zh="角蛋白直发护理">Keratin straightening</li>
-                  <li class="svc-subitem" data-en="Deep conditioning mask" data-zh="深层护发发膜">Deep conditioning mask</li>
-                </ul>
-                <p class="svc-expand__note"
-                   data-en="Service time varies by hair type. Ask us what's right for your hair."
-                   data-zh="服务时间因发质而异，欢迎咨询最适合您的方案。">
-                  Service time varies by hair type. Ask us what's right for your hair.
+              <div class="svc-expand"><div class="svc-expand__inner"><div class="svc-expand__body">
+                <p class="svc-expand__desc"
+                   data-en="Root touch-ups, full colour, or fashion shades to refresh your look."
+                   data-zh="补根、全染或时尚色调，轻松焕新造型。">
+                  Root touch-ups, full colour, or fashion shades to refresh your look.
                 </p>
-                <a href="tel:6045598998" class="btn-svc-book">
-                  <span data-en="Call to Book" data-zh="致电预约">Call to Book</span>
-                  <span aria-hidden="true">→</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </li>
+                <a href="tel:6045598998" class="btn-book-svc"
+                   data-en="Book Now" data-zh="立即预约">Book Now</a>
+              </div></div></div>
+            </li>
 
-      <!-- 06 Styling -->
-      <li class="svc-row reveal d6">
-        <div class="svc-row__header" role="button" tabindex="0" aria-expanded="false"
-             aria-controls="svc-expand-06">
-          <span class="svc-num" aria-hidden="true">06</span>
-          <div class="svc-name" data-en="Styling" data-zh="造型">Styling</div>
-          <p class="svc-desc"
-             data-en="Blowout, flat iron, or special occasion styling"
-             data-zh="吹造型、直板夹或特殊场合造型">Blowout, flat iron, or special occasion styling</p>
-          <button class="svc-arrow" aria-label="Expand" tabindex="-1">
-            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-        </div>
-        <div class="svc-expand" id="svc-expand-06">
-          <div class="svc-expand__inner">
-            <div class="svc-expand__content">
-              <div class="svc-expand__visual">
-                <img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=700&q=80&auto=format&fit=crop"
-                     alt="Hair styling"
-                     onerror="this.style.display='none'">
+          </ol>
+        </div><!-- /.svc-group--men -->
+
+        <!-- ── LADY SERVICE ── -->
+        <div class="svc-group svc-group--lady">
+          <div class="svc-group__hd">
+            <span class="svc-group__label"
+                  data-en="Lady Service" data-zh="女士服务">Lady Service</span>
+          </div>
+
+          <div class="svc-cols" aria-hidden="true">
+            <span></span>
+            <span class="svc-col-lbl"><span class="th-en">Short</span><span class="th-zh">短发</span></span>
+            <span class="svc-col-lbl"><span class="th-en">Long</span><span class="th-zh">长发</span></span>
+            <span></span>
+          </div>
+
+          <ol class="svc-list" role="list">
+
+            <li class="svc-item">
+              <div class="svc-row" role="button" tabindex="0" aria-expanded="false">
+                <div class="svc-row__name">
+                  <span class="svc-row__en">Shampoo &amp; Blow-dry</span>
+                  <span class="svc-row__zh">洗发吹干</span>
+                </div>
+                <span class="svc-price muted">—</span>
+                <span class="svc-price">$30 up</span>
+                <svg class="svc-chevron" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
               </div>
-              <div class="svc-expand__body">
-                <ul class="svc-subitems">
-                  <li class="svc-subitem" data-en="Blowout &amp; blow dry" data-zh="吹风造型">Blowout &amp; blow dry</li>
-                  <li class="svc-subitem" data-en="Flat iron &amp; straighten" data-zh="直板夹造型">Flat iron &amp; straighten</li>
-                  <li class="svc-subitem" data-en="Curling &amp; waves" data-zh="卷发造型">Curling &amp; waves</li>
-                  <li class="svc-subitem" data-en="Event &amp; occasion styling" data-zh="活动场合特别造型">Event &amp; occasion styling</li>
-                </ul>
-                <p class="svc-expand__note"
-                   data-en="Walk-in styling available daily. Book ahead for events and special occasions."
-                   data-zh="每日欢迎直接到店造型。活动特别场合建议提前预约。">
-                  Walk-in styling available daily. Book ahead for events and special occasions.
+              <div class="svc-expand"><div class="svc-expand__inner"><div class="svc-expand__body">
+                <p class="svc-expand__desc"
+                   data-en="Full cleanse, deep condition, and a smooth blow-dry finish."
+                   data-zh="彻底洗发、深层护发，再配合吹干定型。">
+                  Full cleanse, deep condition, and a smooth blow-dry finish.
                 </p>
-                <a href="tel:6045598998" class="btn-svc-book">
-                  <span data-en="Call to Book" data-zh="致电预约">Call to Book</span>
-                  <span aria-hidden="true">→</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </li>
+                <a href="tel:6045598998" class="btn-book-svc"
+                   data-en="Book Now" data-zh="立即预约">Book Now</a>
+              </div></div></div>
+            </li>
 
-    </ol>
-  </div>
+            <li class="svc-item">
+              <div class="svc-row" role="button" tabindex="0" aria-expanded="false">
+                <div class="svc-row__name">
+                  <span class="svc-row__en">Hair Cut only</span>
+                  <span class="svc-row__zh">单剪</span>
+                </div>
+                <span class="svc-price">$27 up</span>
+                <span class="svc-price">$33 up</span>
+                <svg class="svc-chevron" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="svc-expand"><div class="svc-expand__inner"><div class="svc-expand__body">
+                <p class="svc-expand__desc"
+                   data-en="Precision dry cut tailored to your face shape and personal style."
+                   data-zh="按脸型与个人风格量身定制的精准干剪。">
+                  Precision dry cut tailored to your face shape and personal style.
+                </p>
+                <a href="tel:6045598998" class="btn-book-svc"
+                   data-en="Book Now" data-zh="立即预约">Book Now</a>
+              </div></div></div>
+            </li>
+
+            <li class="svc-item">
+              <div class="svc-row" role="button" tabindex="0" aria-expanded="false">
+                <div class="svc-row__name">
+                  <span class="svc-row__en">Shampoo Cut</span>
+                  <span class="svc-row__zh">洗剪</span>
+                </div>
+                <span class="svc-price">$37 up</span>
+                <span class="svc-price">$48 up</span>
+                <svg class="svc-chevron" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="svc-expand"><div class="svc-expand__inner"><div class="svc-expand__body">
+                <p class="svc-expand__desc"
+                   data-en="Wash, condition, custom cut, and blow dry — the complete service."
+                   data-zh="洗发、护发、量身剪发，再吹干定型——一站式完整护理。">
+                  Wash, condition, custom cut, and blow dry — the complete service.
+                </p>
+                <a href="tel:6045598998" class="btn-book-svc"
+                   data-en="Book Now" data-zh="立即预约">Book Now</a>
+              </div></div></div>
+            </li>
+
+            <li class="svc-item">
+              <div class="svc-row" role="button" tabindex="0" aria-expanded="false">
+                <div class="svc-row__name">
+                  <span class="svc-row__en">Hair Treatment</span>
+                  <span class="svc-row__zh">护理</span>
+                </div>
+                <span class="svc-price muted">—</span>
+                <span class="svc-price">$68 up</span>
+                <svg class="svc-chevron" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="svc-expand"><div class="svc-expand__inner"><div class="svc-expand__body">
+                <p class="svc-expand__desc"
+                   data-en="Deep conditioning mask to restore shine, softness, and strength."
+                   data-zh="深层护发膜，恢复光泽、柔软度与强韧度。">
+                  Deep conditioning mask to restore shine, softness, and strength.
+                </p>
+                <a href="tel:6045598998" class="btn-book-svc"
+                   data-en="Book Now" data-zh="立即预约">Book Now</a>
+              </div></div></div>
+            </li>
+
+            <li class="svc-item">
+              <div class="svc-row" role="button" tabindex="0" aria-expanded="false">
+                <div class="svc-row__name">
+                  <span class="svc-row__en">Perm</span>
+                  <span class="svc-row__zh">烫发</span>
+                </div>
+                <span class="svc-price muted">—</span>
+                <span class="svc-price">$108 up</span>
+                <svg class="svc-chevron" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="svc-expand"><div class="svc-expand__inner"><div class="svc-expand__body">
+                <p class="svc-expand__desc"
+                   data-en="Classic or digital perm for waves, curls, or added volume."
+                   data-zh="传统或数码烫发，打造波浪、卷发或蓬松感。">
+                  Classic or digital perm for waves, curls, or added volume.
+                </p>
+                <a href="tel:6045598998" class="btn-book-svc"
+                   data-en="Book Now" data-zh="立即预约">Book Now</a>
+              </div></div></div>
+            </li>
+
+            <li class="svc-item">
+              <div class="svc-row" role="button" tabindex="0" aria-expanded="false">
+                <div class="svc-row__name">
+                  <span class="svc-row__en">Color &amp; Highlight</span>
+                  <span class="svc-row__zh">染色 / 挑染</span>
+                </div>
+                <span class="svc-price muted">—</span>
+                <span class="svc-price">$128 up</span>
+                <svg class="svc-chevron" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="svc-expand"><div class="svc-expand__inner"><div class="svc-expand__body">
+                <p class="svc-expand__desc"
+                   data-en="Full colour, highlights, or balayage to brighten and refresh your look."
+                   data-zh="全染、挑染或渐染，提亮并焕新您的造型。">
+                  Full colour, highlights, or balayage to brighten and refresh your look.
+                </p>
+                <a href="tel:6045598998" class="btn-book-svc"
+                   data-en="Book Now" data-zh="立即预约">Book Now</a>
+              </div></div></div>
+            </li>
+
+            <li class="svc-item">
+              <div class="svc-row" role="button" tabindex="0" aria-expanded="false">
+                <div class="svc-row__name">
+                  <span class="svc-row__en">Digital Perm / Rebonding</span>
+                  <span class="svc-row__zh">数码烫 / 离子烫</span>
+                </div>
+                <span class="svc-price muted">—</span>
+                <span class="svc-price">$168 up</span>
+                <svg class="svc-chevron" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="svc-expand"><div class="svc-expand__inner"><div class="svc-expand__body">
+                <p class="svc-expand__desc"
+                   data-en="Heat-set digital waves or protein-based rebonding for smooth, straight hair."
+                   data-zh="热塑数码波浪或蛋白质离子烫，打造顺滑直发。">
+                  Heat-set digital waves or protein-based rebonding for smooth, straight hair.
+                </p>
+                <a href="tel:6045598998" class="btn-book-svc"
+                   data-en="Book Now" data-zh="立即预约">Book Now</a>
+              </div></div></div>
+            </li>
+
+          </ol>
+        </div><!-- /.svc-group--lady -->
+
+      </div><!-- /.svc-accordion -->
+
+      <p class="price-note reveal d3"
+         data-en="All prices starting from. Final price may vary by hair length &amp; technique."
+         data-zh="所有价格为起价，最终价格因发长和技术而异。">
+        All prices starting from. Final price may vary by hair length &amp; technique.
+      </p>
+
+    </div><!-- /.services__content -->
+
+    <!-- ── Right: sticky photo ── -->
+    <div class="services__photo-col" aria-hidden="true">
+      <img src="photos/SalonInterior.jpg"
+           alt="Number 5 Hair Salon interior"
+           loading="lazy"
+           onerror="this.style.display='none';">
+    </div>
+
+  </div><!-- /.services__split -->
 </section>
 
 
@@ -1967,10 +1978,8 @@
       </div>
     </div>
 
-    <!-- Counter -->
     <div class="carousel__counter" id="carouselCounter" aria-live="polite">1 / 7</div>
 
-    <!-- Arrows -->
     <button class="carousel__prev" id="carouselPrev" aria-label="Previous photo">
       <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
     </button>
@@ -1978,7 +1987,6 @@
       <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
     </button>
 
-    <!-- Dots -->
     <div class="carousel__dots" role="tablist" aria-label="Gallery slides">
       <button class="carousel__dot active" role="tab" aria-selected="true"  aria-label="Photo 1"></button>
       <button class="carousel__dot"        role="tab" aria-selected="false" aria-label="Photo 2"></button>
@@ -2127,43 +2135,32 @@
 
         <div class="contact__info-item reveal d5">
           <p class="contact__info-label" data-en="Hours" data-zh="营业时间">Hours</p>
-          <p class="contact__info-value"
-             data-en="Mon – Sun &nbsp; 10:30am – 6:30pm"
-             data-zh="周一至周日 &nbsp; 上午10:30 – 下午6:30">
-            Mon – Sun &nbsp; 10:30am – 6:30pm
+          <p class="contact__info-value">
+            <span data-en="Mon – Fri &nbsp; 10:00am – 6:30pm"
+                  data-zh="周一至五 &nbsp; 上午10:00 – 下午6:30">Mon – Fri &nbsp; 10:00am – 6:30pm</span><br>
+            <span data-en="Sat – Sun &nbsp; 10:30am – 6:30pm"
+                  data-zh="周六至日 &nbsp; 上午10:30 – 下午6:30">Sat – Sun &nbsp; 10:30am – 6:30pm</span>
           </p>
         </div>
       </div>
 
-      <!-- Right card -->
-      <div class="contact__card reveal d2">
-        <p class="contact__card-title"
-           data-en="Visit Us" data-zh="前来造访">Visit Us</p>
-        <div class="contact__card-info">
-          <p><strong>Number 5 Hair Salon</strong></p>
-          <p>401-6133 University Boulevard</p>
-          <p>Vancouver BC &nbsp; V6T 1Z1</p>
-          <br>
-          <p>
-            <span data-en="Hours" data-zh="营业时间">Hours</span><br>
-            <span data-en="Mon–Sun, 10:30am – 6:30pm"
-                  data-zh="周一至周日，10:30am – 6:30pm">Mon–Sun, 10:30am – 6:30pm</span>
-          </p>
-          <br>
-          <p>
-            <span data-en="Phone" data-zh="电话">Phone</span><br>
-            <a href="tel:6045598998">604-559-8998</a>
-          </p>
-          <br>
-          <p data-en="Walk-ins welcome daily."
-             data-zh="每日欢迎直接到访。">Walk-ins welcome daily.</p>
-
-        </div>
-        <a href="https://www.google.com/maps/place/6133+University+Blvd,+Vancouver,+BC+V6T+1Z1/@49.2658618,-123.2492087,3a,75y,330.58h,90t/data=!3m4!1e1!3m2!1sQYRJg4iYZb49x1P-jKNZkw!2e0!4m2!3m1!1s0x548672b7acae9ced:0x3030c2012e5cb3fd"
+      <!-- Right: map -->
+      <div class="contact__map-wrap reveal d2">
+        <iframe
+          src="https://maps.google.com/maps?q=49.2668649,-123.2499731&z=17&output=embed"
+          title="Number 5 Hair Salon location"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+        <a href="https://www.google.com/maps/place/Number+5+Hair+Salon(UBC-Hair+Salon%EF%BC%89/@49.2668649,-123.252548,17z"
            target="_blank" rel="noopener noreferrer"
-           class="contact__directions"
+           class="contact__map-link"
            data-en="Get Directions →"
-           data-zh="获取路线 →">Get Directions →</a>
+           data-zh="获取路线 →">
+          <span>Get Directions →</span>
+          <span style="opacity:0.4; font-size:9px; letter-spacing:0.1em">GOOGLE MAPS</span>
+        </a>
       </div>
 
     </div>
@@ -2179,9 +2176,9 @@
     <h2 class="cta-banner__heading reveal"
         data-en="Walk In Today." data-zh="今天就来吧。">Walk In Today.</h2>
     <p class="cta-banner__sub reveal d1"
-       data-en="No appointment needed. We're open daily at the AMS Nest."
-       data-zh="无需预约，每日开放，就在AMS大楼。">
-      No appointment needed. We're open daily at the AMS Nest.
+       data-en="No appointment needed. Open Mon–Fri 10am &amp; Sat–Sun 10:30am."
+       data-zh="无需预约，周一至五10:00开门，周六日10:30开门。">
+      No appointment needed. Open Mon–Fri 10am &amp; Sat–Sun 10:30am.
     </p>
     <a href="tel:6045598998" class="btn-banner reveal d2"
        data-en="Call 604-559-8998"
@@ -2375,7 +2372,7 @@
       }, { signal });
 
       // Autoplay
-      function startAuto() { autoTimer = setInterval(() => goTo(current + 1), 4500); }
+      function startAuto() { autoTimer = setInterval(() => goTo(current + 1), 7000); }
       function stopAuto()  { clearInterval(autoTimer); }
       function resetAuto() { stopAuto(); startAuto(); }
 
@@ -2406,34 +2403,21 @@
   window.__reinitCarousel();
 
   /* ── SERVICE ACCORDION ── */
-  document.querySelectorAll('.svc-row__header').forEach(header => {
+  document.querySelectorAll('.svc-row').forEach(row => {
     function toggle() {
-      const row = header.closest('.svc-row');
-      const isOpen = row.classList.contains('open');
-
-      // Close any currently open row
-      document.querySelectorAll('.svc-row.open').forEach(r => {
-        r.classList.remove('open');
-        r.querySelector('.svc-row__header').setAttribute('aria-expanded', 'false');
+      const item = row.closest('.svc-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.svc-item.open').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.svc-row').setAttribute('aria-expanded', 'false');
       });
-
-      // Open this one if it wasn't already open
       if (!isOpen) {
-        row.classList.add('open');
-        header.setAttribute('aria-expanded', 'true');
-        // Scroll so the row is visible, but only if it's below the fold
-        setTimeout(() => {
-          const rect = row.getBoundingClientRect();
-          const navHeight = document.getElementById('site-header').offsetHeight;
-          if (rect.top < navHeight + 20) {
-            window.scrollBy({ top: rect.top - navHeight - 20, behavior: 'smooth' });
-          }
-        }, 100);
+        item.classList.add('open');
+        row.setAttribute('aria-expanded', 'true');
       }
     }
-
-    header.addEventListener('click', toggle);
-    header.addEventListener('keydown', e => {
+    row.addEventListener('click', toggle);
+    row.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
     });
   });
@@ -2486,12 +2470,11 @@
     return document.documentElement.lang === 'zh-CN' ? 'zh' : 'en';
   }
 
-  // Fetch all four data files in parallel
-  const [announcement, hero, gallery, services] = await Promise.all([
+  // Fetch data files in parallel
+  const [announcement, hero, gallery] = await Promise.all([
     tryJSON('/data/settings/announcement.json'),
     tryJSON('/data/hero.json'),
-    tryJSON('/data/gallery.json'),
-    tryJSON('/data/services.json')
+    tryJSON('/data/gallery.json')
   ]);
 
   // ── 1. ANNOUNCEMENT BAR ──────────────────────────────────
@@ -2512,48 +2495,13 @@
     if (img) img.src = hero.image;
   }
 
-  // ── 3. SERVICES ──────────────────────────────────────────
-  if (services && Array.isArray(services.services)) {
-    services.services.forEach(function (svc, idx) {
-      const num = String(idx + 1).padStart(2, '0');
-      const expandEl = document.getElementById('svc-expand-' + num);
-      if (!expandEl) return;
-      const row = expandEl.closest('.svc-row');
-
-      // Name
-      const nameEl = row && row.querySelector('.svc-name');
-      if (nameEl && svc.name_en) {
-        nameEl.dataset.en = svc.name_en;
-        if (svc.name_zh) nameEl.dataset.zh = svc.name_zh;
-        nameEl.textContent = lang() === 'zh'
-          ? (svc.name_zh || svc.name_en)
-          : svc.name_en;
-      }
-
-      // Short description
-      const descEl = row && row.querySelector('.svc-desc');
-      if (descEl && svc.description_en) {
-        descEl.dataset.en = svc.description_en;
-        if (svc.description_zh) descEl.dataset.zh = svc.description_zh;
-        descEl.textContent = lang() === 'zh'
-          ? (svc.description_zh || svc.description_en)
-          : svc.description_en;
-      }
-
-      // Photo in the expand panel
-      const imgEl = expandEl.querySelector('.svc-expand__visual img');
-      if (imgEl && svc.image) imgEl.src = svc.image;
-    });
-  }
-
-  // ── 4. GALLERY ───────────────────────────────────────────
+  // ── 3. GALLERY ───────────────────────────────────────────
   if (gallery && Array.isArray(gallery.photos) && gallery.photos.length > 0) {
-    const track        = document.getElementById('carouselTrack');
+    const track         = document.getElementById('carouselTrack');
     const dotsContainer = document.querySelector('.carousel__dots');
-    const counter      = document.getElementById('carouselCounter');
+    const counter       = document.getElementById('carouselCounter');
 
     if (track && dotsContainer && counter) {
-      // Rebuild slides
       track.innerHTML = gallery.photos.map(function (p, i) {
         var altText = esc(p.alt || ('Number 5 Hair Salon \u2014 photo ' + (i + 1)));
         var imgSrc  = esc(p.image || '');
@@ -2562,7 +2510,6 @@
                '</div>';
       }).join('');
 
-      // Rebuild dots
       dotsContainer.innerHTML = gallery.photos.map(function (_, i) {
         return '<button class="carousel__dot' + (i === 0 ? ' active' : '') + '"' +
                ' role="tab" aria-selected="' + (i === 0 ? 'true' : 'false') + '"' +
@@ -2570,8 +2517,6 @@
       }).join('');
 
       counter.textContent = '1 / ' + gallery.photos.length;
-
-      // Re-init carousel with rebuilt DOM (AbortController cleans up old listeners)
       if (window.__reinitCarousel) window.__reinitCarousel();
     }
   }
