@@ -26,6 +26,8 @@ collections:
   - name: settings
     label: "Announcement Bar"
     format: json
+    editor:
+      preview: false
     files:
       - name: announcement
         label: "Announcement Text"
@@ -49,6 +51,8 @@ collections:
   - name: hero
     label: "Hero Image"
     format: json
+    editor:
+      preview: false
     files:
       - name: hero
         label: "Hero Photo"
@@ -66,6 +70,8 @@ collections:
   - name: gallery
     label: "Gallery Photos"
     format: json
+    editor:
+      preview: false
     files:
       - name: gallery
         label: "Gallery Carousel"
@@ -96,6 +102,8 @@ collections:
   - name: services
     label: "Services & Prices"
     format: json
+    editor:
+      preview: false
     files:
       - name: services
         label: "Services & Prices"
