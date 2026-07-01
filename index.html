@@ -48,7 +48,7 @@
     html {
       scroll-behavior: smooth;
       -webkit-text-size-adjust: 100%;
-      overflow-x: hidden;
+      overflow-x: clip;   /* guards horizontal overflow WITHOUT breaking position:sticky (hidden would) */
       width: 100%;
       scrollbar-width: none;      /* Firefox: no gutter/strip */
       -ms-overflow-style: none;   /* old Edge */
@@ -59,7 +59,7 @@
       font-family: var(--ff-body);
       background: var(--white);
       color: var(--dark);
-      overflow-x: hidden;
+      overflow-x: clip;
       scrollbar-width: none;
       -ms-overflow-style: none;
     }
