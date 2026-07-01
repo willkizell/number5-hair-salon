@@ -50,7 +50,10 @@
       -webkit-text-size-adjust: 100%;
       overflow-x: hidden;
       width: 100%;
+      scrollbar-width: none;      /* Firefox: no gutter/strip */
+      -ms-overflow-style: none;   /* old Edge */
     }
+    html::-webkit-scrollbar { display: none; }  /* Chrome/Safari: the actual page scroller lives on <html> */
 
     body {
       font-family: var(--ff-body);
