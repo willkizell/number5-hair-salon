@@ -32,13 +32,6 @@
           "price": "$88 up",
           "desc_en": "Root touch-ups, full colour, or fashion shades to refresh your look.",
           "desc_zh": "补根、全染或时尚色调，轻松焕新造型。"
-        },
-        {
-          "name_en": "Test",
-          "name_zh": "SERVICE NAME — ",
-          "price": "$70 and up",
-          "desc_en": "A test haircut",
-          "desc_zh": "SERVICE NAME — TEST"
         }
       ]
     },
