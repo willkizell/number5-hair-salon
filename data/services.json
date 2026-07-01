@@ -1,46 +1,106 @@
 {
-  "services": [
+  "groups": [
     {
-      "name_en": "Men's Haircut",
-      "name_zh": "男士剪发",
-      "description_en": "Scissor or clipper cut, includes shampoo and blow dry",
-      "description_zh": "剪刀或推剪，含洗发吹干",
-      "image": "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=700&q=80&auto=format&fit=crop"
+      "label_en": "Men's Services",
+      "label_zh": "男士服务",
+      "dual_price": false,
+      "items": [
+        {
+          "name_en": "Hair Cut only",
+          "name_zh": "单剪",
+          "price": "$22 up",
+          "desc_en": "Dry cut with scissors or clippers, shaped and finished to your style.",
+          "desc_zh": "使用剪刀或推剪修剪，按您喜欢的发型塑形修整。"
+        },
+        {
+          "name_en": "Shampoo Cut",
+          "name_zh": "洗剪",
+          "price": "$33 up",
+          "desc_en": "Relaxing shampoo followed by a precision cut and blow dry.",
+          "desc_zh": "舒适洗发后，进行精准剪发并吹干定型。"
+        },
+        {
+          "name_en": "Perm",
+          "name_zh": "烫发",
+          "price": "$88 up",
+          "desc_en": "Waves, curls, or textured styles to suit your look and lifestyle.",
+          "desc_zh": "波浪、卷发或纹理造型，打造符合您风格与生活方式的发型。"
+        },
+        {
+          "name_en": "Color",
+          "name_zh": "染色",
+          "price": "$88 up",
+          "desc_en": "Root touch-ups, full colour, or fashion shades to refresh your look.",
+          "desc_zh": "补根、全染或时尚色调，轻松焕新造型。"
+        }
+      ]
     },
     {
-      "name_en": "Women's Haircut",
-      "name_zh": "女士剪发",
-      "description_en": "Precision cut tailored to your style, includes shampoo",
-      "description_zh": "精准剪发，含洗发",
-      "image": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=700&q=80&auto=format&fit=crop"
-    },
-    {
-      "name_en": "Shampoo & Conditioning",
-      "name_zh": "洗发护发",
-      "description_en": "Full wash, condition, and blow dry service",
-      "description_zh": "洗发、护发、吹干",
-      "image": "https://images.unsplash.com/photo-1560869713-7d0a29430803?w=700&q=80&auto=format&fit=crop"
-    },
-    {
-      "name_en": "Hair Colouring",
-      "name_zh": "染发",
-      "description_en": "Full colour, highlights, and touch-ups",
-      "description_zh": "全染、挑染及补色",
-      "image": "https://images.unsplash.com/photo-1562322140-8baeececf3df?w=700&q=80&auto=format&fit=crop"
-    },
-    {
-      "name_en": "Perms & Treatment",
-      "name_zh": "烫发与护理",
-      "description_en": "Curls, waves, straightening, and deep treatment",
-      "description_zh": "卷发、波浪、直发及深层护理",
-      "image": "https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=700&q=80&auto=format&fit=crop"
-    },
-    {
-      "name_en": "Styling",
-      "name_zh": "造型",
-      "description_en": "Blowout, flat iron, or special occasion styling",
-      "description_zh": "吹造型、直板夹或特殊场合造型",
-      "image": "https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=700&q=80&auto=format&fit=crop"
+      "label_en": "Lady Service",
+      "label_zh": "女士服务",
+      "dual_price": true,
+      "col1_en": "Short",
+      "col1_zh": "短发",
+      "col2_en": "Long",
+      "col2_zh": "长发",
+      "items": [
+        {
+          "name_en": "Shampoo & Blow-dry",
+          "name_zh": "洗发吹干",
+          "price1": "—",
+          "price2": "$30 up",
+          "desc_en": "Full cleanse, deep condition, and a smooth blow-dry finish.",
+          "desc_zh": "彻底洗发、深层护发，再配合吹干定型。"
+        },
+        {
+          "name_en": "Hair Cut only",
+          "name_zh": "单剪",
+          "price1": "$27 up",
+          "price2": "$33 up",
+          "desc_en": "Precision dry cut tailored to your face shape and personal style.",
+          "desc_zh": "按脸型与个人风格量身定制的精准干剪。"
+        },
+        {
+          "name_en": "Shampoo Cut",
+          "name_zh": "洗剪",
+          "price1": "$37 up",
+          "price2": "$48 up",
+          "desc_en": "Wash, condition, custom cut, and blow dry — the complete service.",
+          "desc_zh": "洗发、护发、量身剪发，再吹干定型——一站式完整护理。"
+        },
+        {
+          "name_en": "Hair Treatment",
+          "name_zh": "护理",
+          "price1": "—",
+          "price2": "$68 up",
+          "desc_en": "Deep conditioning mask to restore shine, softness, and strength.",
+          "desc_zh": "深层护发膜，恢复光泽、柔软度与强韧度。"
+        },
+        {
+          "name_en": "Perm",
+          "name_zh": "烫发",
+          "price1": "—",
+          "price2": "$108 up",
+          "desc_en": "Classic or digital perm for waves, curls, or added volume.",
+          "desc_zh": "传统或数码烫发，打造波浪、卷发或蓬松感。"
+        },
+        {
+          "name_en": "Color & Highlight",
+          "name_zh": "染色 / 挑染",
+          "price1": "—",
+          "price2": "$128 up",
+          "desc_en": "Full colour, highlights, or balayage to brighten and refresh your look.",
+          "desc_zh": "全染、挑染或渐染，提亮并焕新您的造型。"
+        },
+        {
+          "name_en": "Digital Perm / Rebonding",
+          "name_zh": "数码烫 / 离子烫",
+          "price1": "—",
+          "price2": "$168 up",
+          "desc_en": "Heat-set digital waves or protein-based rebonding for smooth, straight hair.",
+          "desc_zh": "热塑数码波浪或蛋白质离子烫，打造顺滑直发。"
+        }
+      ]
     }
   ]
 }
