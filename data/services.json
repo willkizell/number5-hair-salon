@@ -8,7 +8,7 @@
         {
           "name_en": "Hair Cut only",
           "name_zh": "单剪",
-          "price": "$30 up",
+          "price": "$22 up",
           "desc_en": "Dry cut with scissors or clippers, shaped and finished to your style.",
           "desc_zh": "使用剪刀或推剪修剪，按您喜欢的发型塑形修整。"
         },
@@ -32,6 +32,13 @@
           "price": "$88 up",
           "desc_en": "Root touch-ups, full colour, or fashion shades to refresh your look.",
           "desc_zh": "补根、全染或时尚色调，轻松焕新造型。"
+        },
+        {
+          "name_en": "Test",
+          "name_zh": "SERVICE NAME — ",
+          "price": "$70 and up",
+          "desc_en": "A test haircut",
+          "desc_zh": "SERVICE NAME — TEST"
         }
       ]
     },
