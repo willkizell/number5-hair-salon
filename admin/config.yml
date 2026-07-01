@@ -92,40 +92,50 @@ collections:
                   A short description of the photo for screen readers.
                   e.g. "Salon interior showing styling chairs"
 
-  # ── 4. SERVICES ──────────────────────────────────────
+  # ── 4. SERVICES & PRICES ─────────────────────────────
   - name: services
-    label: "Services"
+    label: "Services & Prices"
     format: json
     files:
       - name: services
-        label: "Services List"
+        label: "Services & Prices"
         file: "data/services.json"
         description: >
-          The six services shown on the homepage.
-          Update the name, short description, and photo for each.
-          The order here matches the order on the website (01–06).
+          Every service, price, and description on the homepage — in English
+          and 中文. Services are organised into groups (e.g. Men's Services,
+          Lady Service). Drag rows to reorder; use the + button to add.
+          Single-price groups: fill "Price". Two-column groups (Short / Long):
+          turn on "Two price columns" and fill Price 1 and Price 2.
         fields:
-          - label: "Services"
-            name: services
+          - label: "Service Groups"
+            name: groups
             widget: list
-            allow_add: false
-            collapsed: false
-            label_singular: "Service"
+            label_singular: "Group"
+            collapsed: true
+            summary: "{{fields.label_en}}"
             fields:
-              - label: "Service Name — English"
-                name: name_en
-                widget: string
-              - label: "Service Name — Chinese (中文)"
-                name: name_zh
-                widget: string
-              - label: "Short Description — English"
-                name: description_en
-                widget: string
-                hint: "One sentence shown below the service name in the list"
-              - label: "Short Description — Chinese (中文)"
-                name: description_zh
-                widget: string
-              - label: "Service Photo"
-                name: image
-                widget: image
-                hint: "Shown when the customer expands this service. Landscape preferred."
+              - { label: "Group Name — English", name: label_en, widget: string }
+              - { label: "Group Name — 中文", name: label_zh, widget: string }
+              - label: "Two price columns (Short / Long)?"
+                name: dual_price
+                widget: boolean
+                default: false
+                hint: "ON = two price columns (e.g. Lady Service: Short & Long). OFF = one price per service (e.g. Men's Services)."
+              - { label: "Column 1 label — English", name: col1_en, widget: string, required: false, default: "Short", hint: "Only used when two price columns is ON" }
+              - { label: "Column 1 label — 中文", name: col1_zh, widget: string, required: false, default: "短发" }
+              - { label: "Column 2 label — English", name: col2_en, widget: string, required: false, default: "Long", hint: "Only used when two price columns is ON" }
+              - { label: "Column 2 label — 中文", name: col2_zh, widget: string, required: false, default: "长发" }
+              - label: "Services in this group"
+                name: items
+                widget: list
+                label_singular: "Service"
+                collapsed: true
+                summary: "{{fields.name_en}}  ·  {{fields.price}}{{fields.price2}}"
+                fields:
+                  - { label: "Service Name — English", name: name_en, widget: string }
+                  - { label: "Service Name — 中文", name: name_zh, widget: string }
+                  - { label: "Price (single-price groups)", name: price, widget: string, required: false, hint: "e.g. $22 up — use for single-price groups like Men's Services" }
+                  - { label: "Price 1 / left column (two-column groups)", name: price1, widget: string, required: false, hint: "e.g. Short price. Enter — if not offered" }
+                  - { label: "Price 2 / right column (two-column groups)", name: price2, widget: string, required: false, hint: "e.g. Long price" }
+                  - { label: "Description — English", name: desc_en, widget: string, hint: "One sentence shown when the service is expanded" }
+                  - { label: "Description — 中文", name: desc_zh, widget: string }
