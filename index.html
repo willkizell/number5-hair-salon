@@ -2293,7 +2293,11 @@
 <script>
   /* ── LANGUAGE SYSTEM ── */
   const LANG_KEY = 'n5_lang';
-  let currentLang = localStorage.getItem(LANG_KEY) || 'en';
+  // Priority: ?lang= URL param (used by the printed QR codes) > saved choice > English default
+  const urlLang = new URLSearchParams(location.search).get('lang');
+  let currentLang = (urlLang === 'zh' || urlLang === 'en')
+    ? urlLang
+    : (localStorage.getItem(LANG_KEY) || 'en');
 
   function setLang(lang) {
     currentLang = lang;
