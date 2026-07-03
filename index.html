@@ -1460,10 +1460,30 @@
         grid-template-columns: 1fr;
         min-height: 92vh;
       }
-      .hero__visual { display: none; }
+      .hero { position: relative; }
+      /* Show the salon photo as a soft backdrop behind the text — visible up top,
+         fading into white where the headline + CTAs sit so copy stays readable */
+      .hero__visual {
+        display: block;
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        opacity: 0.55;
+      }
+      .hero__visual img { object-position: center 22%; }
+      .hero__visual::before {
+        background: linear-gradient(180deg,
+          rgba(255,255,255,0.22) 0%,
+          rgba(255,255,255,0.72) 46%,
+          var(--white) 76%);
+      }
+      .hero__visual::after { display: none; }
+      .hero__visual-label { display: none; }
       .hero__content {
+        position: relative;
+        z-index: 1;
         padding: clamp(48px, 8vw, 80px) clamp(20px, 6vw, 36px) 72px;
-        background: linear-gradient(180deg, #F5F5F5 0%, var(--white) 40%);
+        background: transparent;
         min-height: calc(92vh - var(--header-h));
         justify-content: flex-end;
       }
