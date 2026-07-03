@@ -1533,34 +1533,6 @@
 </head>
 <body>
 
-<!-- TEMP DEBUG: only active with ?debug=1 in the URL -->
-<script>
-if (location.search.indexOf('debug=1') !== -1) {
-  var bar = document.createElement('div');
-  bar.style.cssText = 'position:fixed;top:0;left:0;right:0;height:200px;background:rgba(255,0,0,0.55);z-index:99999;pointer-events:none;';
-  var pad = document.createElement('div');
-  pad.style.cssText = 'position:fixed;bottom:0;left:0;right:0;background:#0f0;color:#000;font:12px/1.4 monospace;padding:8px;z-index:99999;white-space:pre;';
-  document.addEventListener('DOMContentLoaded', function(){
-    document.body.appendChild(bar); document.body.appendChild(pad);
-    var probe = document.createElement('div');
-    probe.style.cssText='position:fixed;top:0;height:env(safe-area-inset-top,0px);width:1px;';
-    document.body.appendChild(probe);
-    function upd(){
-      var sat = getComputedStyle(probe).height;
-      var h = document.getElementById('site-header').getBoundingClientRect();
-      var vv = window.visualViewport;
-      pad.textContent =
-        'safe-area-top: '+sat+'\n'+
-        'header top/bottom: '+h.top.toFixed(1)+' / '+h.bottom.toFixed(1)+'\n'+
-        'innerH: '+window.innerHeight+'  scrollY: '+Math.round(window.scrollY)+'\n'+
-        'visualVP offsetTop: '+(vv?vv.offsetTop.toFixed(1):'n/a')+'  height: '+(vv?vv.height.toFixed(0):'n/a');
-    }
-    upd(); window.addEventListener('scroll',upd,{passive:true});
-    if(window.visualViewport){visualViewport.addEventListener('scroll',upd);visualViewport.addEventListener('resize',upd);}
-  });
-}
-</script>
-
 <!-- ═══════════════════════════════════════
      FIXED SITE HEADER
 ═══════════════════════════════════════ -->
