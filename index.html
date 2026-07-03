@@ -2166,7 +2166,7 @@
            data-zh="就在大学大道AMS大楼内。方便找到，欢迎直接到访。">
           Right inside the AMS Nest building on University Boulevard. Easy to find, free to walk in.
         </p>
-        <a href="tel:6045598998" class="contact__phone reveal d3"
+        <a href="tel:6045598998" class="contact__phone reveal d3 js-phone"
            aria-label="Call us at 604-559-8998">604-559-8998</a>
 
         <div class="contact__info-item reveal d4">
@@ -2223,7 +2223,7 @@
        data-zh="无需预约，周一至五10:00开门，周六日10:30开门。">
       No appointment needed. Open Mon–Fri 10am &amp; Sat–Sun 10:30am.
     </p>
-    <a href="tel:6045598998" class="btn-banner reveal d2"
+    <a href="tel:6045598998" class="btn-banner reveal d2 js-phone-cta"
        data-en="Call 604-559-8998"
        data-zh="致电 604-559-8998">Call 604-559-8998</a>
   </div>
@@ -2264,7 +2264,7 @@
         <p>401-6133 University Boulevard</p>
         <p>Vancouver BC &nbsp; V6T 1Z1</p>
         <p style="margin-top: 10px;">
-          <a href="tel:6045598998">604-559-8998</a>
+          <a href="tel:6045598998" class="js-phone">604-559-8998</a>
         </p>
       </div>
 
@@ -2531,11 +2531,12 @@
   }
 
   // Fetch data files in parallel
-  const [announcement, hero, gallery, services] = await Promise.all([
+  const [announcement, hero, gallery, services, contact] = await Promise.all([
     tryJSON('/data/settings/announcement.json'),
     tryJSON('/data/hero.json'),
     tryJSON('/data/gallery.json'),
-    tryJSON('/data/services.json')
+    tryJSON('/data/services.json'),
+    tryJSON('/data/contact.json')
   ]);
 
   // ── 1. ANNOUNCEMENT BAR ──────────────────────────────────
@@ -2644,6 +2645,26 @@
       if (window.__reinitSvcAccordion) window.__reinitSvcAccordion();
       if (typeof setLang === 'function') setLang(currentLang);  // apply current language to new nodes
     }
+  }
+
+  // ── 5. PHONE NUMBER (CMS-editable via data/contact.json) ──
+  // One field controls every "call" link and every place the number shows.
+  if (contact && contact.phone) {
+    const disp = String(contact.phone).trim();
+    const tel  = disp.replace(/[^\d+]/g, '');           // strip spaces/dashes for the tel: link
+    // Every call link on the page (nav, hero, banner, contact, footer, and each service row)
+    document.querySelectorAll('a[href^="tel:"]').forEach(function (a) { a.href = 'tel:' + tel; });
+    // Plain displayed number (contact block + footer)
+    document.querySelectorAll('.js-phone').forEach(function (el) {
+      el.textContent = disp;
+      el.setAttribute('aria-label', 'Call us at ' + disp);
+    });
+    // Bilingual "Call <number>" button — keep both languages in sync
+    document.querySelectorAll('.js-phone-cta').forEach(function (el) {
+      el.dataset.en = 'Call ' + disp;
+      el.dataset.zh = '致电 ' + disp;
+      el.textContent = (lang() === 'zh' ? '致电 ' : 'Call ') + disp;
+    });
   }
 
   // ── NETLIFY IDENTITY — redirect to /admin/ after login ──

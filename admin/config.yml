@@ -47,7 +47,29 @@ collections:
             hint: >
               e.g. 欢迎直接到店 · UBC AMS大楼 · 每日营业 10:30am – 6:30pm
 
-  # ── 2. HERO IMAGE ────────────────────────────────────
+  # ── 2. PHONE NUMBER ──────────────────────────────────
+  - name: contact
+    label: "Phone Number"
+    format: json
+    editor:
+      preview: false
+    files:
+      - name: contact
+        label: "Phone Number"
+        file: "data/contact.json"
+        description: >
+          The salon phone number. This updates the number everywhere on the
+          site at once — the "Book Now" / "Call" buttons, the contact section,
+          and the footer. You only need to change it here.
+        fields:
+          - label: "Phone Number"
+            name: phone
+            widget: string
+            hint: >
+              e.g. 604-559-8998  — type it the way you want it shown; the
+              tap-to-call buttons update automatically.
+
+  # ── 3. HERO IMAGE ────────────────────────────────────
   - name: hero
     label: "Hero Image"
     format: json
