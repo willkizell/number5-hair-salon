@@ -126,6 +126,11 @@
          page content never bleeds through above the bar on notched iPhones */
       background: var(--white);
       padding-top: env(safe-area-inset-top, 0px);
+      /* Belt-and-suspenders for iOS Safari: when the address bar minimises on
+         scroll it reveals a strip ABOVE the fixed header's top:0. Cast the white
+         background upward so that strip is always painted white (never shows
+         page content). Renders behind the bars, off-screen on notchless phones. */
+      box-shadow: 0 -100px 0 100px var(--white);
     }
 
     /* ── TOPBAR ── */
