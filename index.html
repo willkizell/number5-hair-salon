@@ -3,11 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Solid DARK theme-color (matches the announcement bar). iOS paints a dark
-       theme-color fully opaque, so the status-bar strip is clean and no page
-       content shows through — the same approach as the LandBank site. A light/
-       white theme-color renders translucent on iOS and lets content bleed. -->
-  <meta name="theme-color" content="#1A1A1A">
+  <meta name="theme-color" content="#ffffff">
   <title>Number 5 Hair Salon · UBC AMS Nest · Vancouver</title>
   <meta name="description" content="Professional hair salon at UBC AMS Nest, 401-6133 University Boulevard. Walk-ins welcome. Mon–Fri 10:00am–6:30pm · Sat–Sun 10:30am–6:30pm. Call 604-559-8998. 欢迎光临Number 5美发沙龙。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -137,6 +133,24 @@
       z-index: 100;
       /* Solid background so page content never shows through the bar */
       background: var(--white);
+    }
+
+    /* White box that covers the iOS status-bar strip once you scroll, so page
+       content stops bleeding behind the status bar. It's a fixed direct child of
+       <body> (reaches the true top, unlike elements inside the sticky header),
+       sits above page content but below the header, and only shows when scrolled
+       (the top is already clean at rest). Mobile only. */
+    .ios-top-cover {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 64px;
+      background: var(--white);
+      z-index: 95;
+      pointer-events: none;
+      display: none;
+    }
+    @media (max-width: 768px) {
+      .ios-top-cover.show { display: block; }
     }
 
     /* ── TOPBAR ── */
@@ -1457,9 +1471,9 @@
     ═══════════════════════════════════════ */
     @media (max-width: 768px) {
       :root {
-        --topbar-h: 68px;   /* taller dark announcement bar = bigger dark buffer at the very top */
+        --topbar-h: 34px;
         --nav-h: 76px;
-        --header-h: 144px;
+        --header-h: 110px;
       }
 
       /* Nav mobile layout */
@@ -1544,6 +1558,9 @@
   </style>
 </head>
 <body>
+
+<!-- White cover for the iOS status-bar strip (shown when scrolled) -->
+<div class="ios-top-cover" id="iosTopCover" aria-hidden="true"></div>
 
 <!-- ═══════════════════════════════════════
      FIXED SITE HEADER
@@ -2373,12 +2390,12 @@
   const topbarEl = document.getElementById('topbar');
   const navEl    = document.getElementById('nav');
 
+  const iosTopCover = document.getElementById('iosTopCover');
   window.addEventListener('scroll', () => {
     const y = window.scrollY;
-    // Keep the dark announcement bar visible at all times so the top of the
-    // page is always dark — iOS frosts whatever sits at the top, and a dark
-    // bar reads clean while light page content bleeds through. (Do NOT collapse.)
+    topbarEl.classList.toggle('hidden', y > 50);
     navEl.classList.toggle('scrolled', y > 50);
+    iosTopCover.classList.toggle('show', y > 50);
   }, { passive: true });
 
 
