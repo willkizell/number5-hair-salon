@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#ffffff">
   <title>Number 5 Hair Salon · UBC AMS Nest · Vancouver</title>
   <meta name="description" content="Professional hair salon at UBC AMS Nest, 401-6133 University Boulevard. Walk-ins welcome. Mon–Fri 10:00am–6:30pm · Sat–Sun 10:30am–6:30pm. Call 604-559-8998. 欢迎光临Number 5美发沙龙。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,11 +47,8 @@
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: var(--header-h);   /* anchor links land below the sticky header */
       -webkit-text-size-adjust: 100%;
-      /* NOTE: no overflow-x on <html> — keeping the root scroller default lets iOS
-         Safari handle the status bar normally. The off-screen drawer is clipped by
-         <body> instead (below). */
+      overflow-x: clip;   /* guards horizontal overflow WITHOUT breaking position:sticky (hidden would) */
       width: 100%;
       scrollbar-width: none;      /* Firefox: no gutter/strip */
       -ms-overflow-style: none;   /* old Edge */
@@ -123,34 +119,9 @@
        SITE HEADER (fixed wrapper)
     ═══════════════════════════════════════ */
     .site-header {
-      /* Sticky (not fixed) so the header rides the page's own paint layer.
-         iOS Safari renders the top of the scrolling content into the status-bar
-         strip; a fixed header sits on a separate layer it never paints there,
-         which let page content bleed above the bar. Sticky is painted with the
-         content, so it fills that strip like any other in-flow element. */
-      position: sticky;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      /* Solid background so page content never shows through the bar */
-      background: var(--white);
-    }
-
-    /* White box that covers the iOS status-bar strip once you scroll, so page
-       content stops bleeding behind the status bar. It's a fixed direct child of
-       <body> (reaches the true top, unlike elements inside the sticky header),
-       sits above page content but below the header, and only shows when scrolled
-       (the top is already clean at rest). Mobile only. */
-    .ios-top-cover {
       position: fixed;
       top: 0; left: 0; right: 0;
-      height: 64px;
-      background: var(--white);
-      z-index: 95;
-      pointer-events: none;
-      display: none;
-    }
-    @media (max-width: 768px) {
-      .ios-top-cover.show { display: block; }
+      z-index: 100;
     }
 
     /* ── TOPBAR ── */
@@ -427,9 +398,8 @@
        HERO
     ═══════════════════════════════════════ */
     .hero {
-      /* Sticky header now occupies its own space in flow, so the hero must NOT
-         also offset by the header height (that would double the top gap). */
-      min-height: calc(100vh - var(--header-h));
+      min-height: 100vh;
+      padding-top: var(--header-h);
       display: grid;
       grid-template-columns: 1fr 1fr;
     }
@@ -1559,9 +1529,6 @@
 </head>
 <body>
 
-<!-- White cover for the iOS status-bar strip (shown when scrolled) -->
-<div class="ios-top-cover" id="iosTopCover" aria-hidden="true"></div>
-
 <!-- ═══════════════════════════════════════
      FIXED SITE HEADER
 ═══════════════════════════════════════ -->
@@ -2390,12 +2357,10 @@
   const topbarEl = document.getElementById('topbar');
   const navEl    = document.getElementById('nav');
 
-  const iosTopCover = document.getElementById('iosTopCover');
   window.addEventListener('scroll', () => {
     const y = window.scrollY;
     topbarEl.classList.toggle('hidden', y > 50);
     navEl.classList.toggle('scrolled', y > 50);
-    iosTopCover.classList.toggle('show', y > 50);
   }, { passive: true });
 
 
