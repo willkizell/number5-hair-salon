@@ -50,7 +50,9 @@
       scroll-behavior: smooth;
       scroll-padding-top: var(--header-h);   /* anchor links land below the sticky header */
       -webkit-text-size-adjust: 100%;
-      overflow-x: clip;   /* guards horizontal overflow WITHOUT breaking position:sticky (hidden would) */
+      /* NOTE: no overflow-x on <html> — keeping the root scroller default lets iOS
+         Safari handle the status bar normally. The off-screen drawer is clipped by
+         <body> instead (below). */
       width: 100%;
       scrollbar-width: none;      /* Firefox: no gutter/strip */
       -ms-overflow-style: none;   /* old Edge */
