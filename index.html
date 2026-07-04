@@ -2375,7 +2375,9 @@
 
   window.addEventListener('scroll', () => {
     const y = window.scrollY;
-    topbarEl.classList.toggle('hidden', y > 50);
+    // Keep the dark announcement bar visible at all times so the top of the
+    // page is always dark — iOS frosts whatever sits at the top, and a dark
+    // bar reads clean while light page content bleeds through. (Do NOT collapse.)
     navEl.classList.toggle('scrolled', y > 50);
   }, { passive: true });
 
