@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Paint the status-bar / browser chrome white to match the header -->
   <meta name="theme-color" content="#ffffff">
   <title>Number 5 Hair Salon · UBC AMS Nest · Vancouver</title>
   <meta name="description" content="Professional hair salon at UBC AMS Nest, 401-6133 University Boulevard. Walk-ins welcome. Mon–Fri 10:00am–6:30pm · Sat–Sun 10:30am–6:30pm. Call 604-559-8998. 欢迎光临Number 5美发沙龙。">
@@ -358,13 +357,17 @@
     .mobile-drawer {
       position: fixed;
       top: 0; right: 0; bottom: 0;
-      width: min(300px, 82vw);
+      width: min(340px, 86vw);
       background: var(--white);
       z-index: 99;
-      padding: 90px 36px 48px;
+      /* Clear the sticky header so the first link isn't tucked under it, and
+         pad the bottom for the iOS home indicator */
+      padding: calc(var(--header-h) + 20px) 32px calc(32px + env(safe-area-inset-bottom, 0px));
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 2px;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
       transform: translateX(110%);
       transition: transform 0.45s var(--ease-spring);
       box-shadow: -8px 0 48px rgba(0,0,0,0.12);
@@ -1459,9 +1462,11 @@
         grid-template-columns: 44px 1fr 44px;
         padding: 0 16px;
       }
-      .nav__hamburger { display: flex; }
+      /* Swap sides: book/calendar icon on the LEFT, hamburger on the RIGHT */
+      .nav__right     { order: 1; justify-self: start; }
+      .nav__logo      { order: 2; justify-content: center; }
+      .nav__hamburger { order: 3; justify-self: end; display: flex; }
       .nav__links { display: none; }
-      .nav__logo { justify-content: center; }
       .nav__logo-img { height: 70px; }
       .nav__right .btn-book { display: none; }
       .nav__right .lang-toggle { display: none; }
