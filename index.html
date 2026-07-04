@@ -49,6 +49,7 @@
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: var(--header-h);   /* anchor links land below the sticky header */
       -webkit-text-size-adjust: 100%;
       overflow-x: clip;   /* guards horizontal overflow WITHOUT breaking position:sticky (hidden would) */
       width: 100%;
@@ -121,7 +122,12 @@
        SITE HEADER (fixed wrapper)
     ═══════════════════════════════════════ */
     .site-header {
-      position: fixed;
+      /* Sticky (not fixed) so the header rides the page's own paint layer.
+         iOS Safari renders the top of the scrolling content into the status-bar
+         strip; a fixed header sits on a separate layer it never paints there,
+         which let page content bleed above the bar. Sticky is painted with the
+         content, so it fills that strip like any other in-flow element. */
+      position: sticky;
       top: 0; left: 0; right: 0;
       z-index: 100;
       /* Solid background so page content never shows through the bar */
@@ -398,8 +404,9 @@
        HERO
     ═══════════════════════════════════════ */
     .hero {
-      min-height: 100vh;
-      padding-top: var(--header-h);
+      /* Sticky header now occupies its own space in flow, so the hero must NOT
+         also offset by the header height (that would double the top gap). */
+      min-height: calc(100vh - var(--header-h));
       display: grid;
       grid-template-columns: 1fr 1fr;
     }
